@@ -7,9 +7,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const works = [
     {
         title:"SHIGATSUSHA",
-        category:"WEB DESIGN / CORPORATE SITE",
+        category:"RECRUIT SITE / WordPress",
         url:"https://www.shigatsusya.jp/",
-        img:"img/dummy.jpg"
+        img:"img/work-01.jpg"
     },
     {title:"SMBC CONSUMER FINANCE",category:"WEB DESIGN / RECRUIT SITE",url:"https://www.smbc-cf-recruit.jp/",img:"img/dummy.jpg"},
     {title:"KINTETSU MIYAKO HOTELS",category:"WEB DESIGN / RECRUIT SITE",url:"https://www.miyakohotels-recruiting.com/newgraduate.html",img:"img/dummy.jpg"},
