@@ -1,63 +1,105 @@
+document.addEventListener("DOMContentLoaded", () => {
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Custom Cursor
-    const cursor = document.getElementById('cursor-follower');
-    
-    if (window.matchMedia('(pointer: fine)').matches) {
-        cursor.style.display = 'block';
-        
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-        });
+  /* -----------------------------
+  Works Data
+  ----------------------------- */
 
-        // Hover effect for links
-        const links = document.querySelectorAll('a, button');
-        links.forEach(link => {
-            link.addEventListener('mouseenter', () => {
-                cursor.style.transform = 'translate(-50%, -50%) scale(2)';
-                cursor.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-                cursor.style.mixBlendMode = 'normal';
-            });
-            link.addEventListener('mouseleave', () => {
-                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-                cursor.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
-                cursor.style.mixBlendMode = 'difference';
-            });
-        });
-    }
+  const works = [
+    {
+        title:"SHIGATSUSHA",
+        category:"WEB DESIGN / CORPORATE SITE",
+        url:"https://www.shigatsusya.jp/",
+        img:"img/dummy.jpg"
+    },
+    {title:"SMBC CONSUMER FINANCE",category:"WEB DESIGN / RECRUIT SITE",url:"https://www.smbc-cf-recruit.jp/",img:"img/dummy.jpg"},
+    {title:"KINTETSU MIYAKO HOTELS",category:"WEB DESIGN / RECRUIT SITE",url:"https://www.miyakohotels-recruiting.com/newgraduate.html",img:"img/dummy.jpg"},
+    {title:"ACCESS PROGRESS",category:"WEB DESIGN / CORPORATE SITE",url:"https://www.access-t.co.jp/pg/",img:"img/dummy.jpg"},
+    {title:"SUNTORY LOGISTICS",category:"WEB DESIGN / RECRUIT SITE",url:"https://www.suntorylogistics.co.jp/recruit/",img:"img/dummy.jpg"},
+    {title:"KINEEL",category:"WEB DESIGN / ONLINE SHOP",url:"https://www.kineel.jp/f/shop/",img:"img/dummy.jpg"},
+    {title:"SOWAKA",category:"WEB DESIGN / OFFICIAL SITE",url:"https://sowaka.com/",img:"img/dummy.jpg"},
+    {title:"YUIKUEN",category:"WEB DESIGN / OFFICIAL SITE",url:"https://yuikuen.com/",img:"img/dummy.jpg"}
+  ];
 
-    // Scroll Animation for Sections
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
-    };
+  const grid = document.getElementById("worksGrid");
 
-    const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('in-view');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
+  if (grid) {
+    const fragment = document.createDocumentFragment();
 
-    const sections = document.querySelectorAll('section');
-    sections.forEach(section => {
-        observer.observe(section);
-        section.style.opacity = '0';
-        section.style.transform = 'translateY(20px)';
-        section.style.transition = 'opacity 1s cubic-bezier(0.19, 1, 0.22, 1), transform 1s cubic-bezier(0.19, 1, 0.22, 1)';
+    works.forEach(work => {
+
+      const article = document.createElement("article");
+      article.className = "work-item";
+
+      article.innerHTML = `
+        <a href="${work.url}" target="_blank" rel="noopener noreferrer" class="work-link">
+          <div class="work-image-container">
+            <div class="work-image-placeholder">
+              <img src="${work.img}" alt="${work.title}" loading="lazy">
+            </div>
+            <div class="work-overlay">
+              <span class="view-more">View</span>
+            </div>
+          </div>
+          <div class="work-info">
+            <p class="work-category">${work.category}</p>
+            <h3 class="work-title">${work.title}</h3>
+          </div>
+        </a>
+      `;
+
+      fragment.appendChild(article);
     });
 
-    // Add class for animation
-    const style = document.createElement('style');
-    style.innerHTML = `
-        section.in-view {
-            opacity: 1 !important;
-            transform: translateY(0) !important;
-        }
-    `;
-    document.head.appendChild(style);
+    grid.appendChild(fragment);
+  }
+
+  /* -----------------------------
+  Custom Cursor
+  ----------------------------- */
+
+  const cursor = document.getElementById("cursor-follower");
+
+  if (cursor && window.matchMedia("(pointer: fine)").matches) {
+
+    cursor.style.display = "block";
+
+    document.addEventListener("mousemove", e => {
+      cursor.style.left = e.clientX + "px";
+      cursor.style.top = e.clientY + "px";
+    });
+
+    document.addEventListener("mouseover", e => {
+      if (e.target.closest("a,button")) {
+        cursor.classList.add("cursor-hover");
+      }
+    });
+
+    document.addEventListener("mouseout", e => {
+      if (e.target.closest("a,button")) {
+        cursor.classList.remove("cursor-hover");
+      }
+    });
+
+  }
+
+  /* -----------------------------
+  Scroll Animation
+  ----------------------------- */
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("in-view");
+      observer.unobserve(entry.target);
+    }
+  });
+}, {
+  rootMargin: "0px 0px -200px 0px",
+  threshold: 0
+});
+
+document.querySelectorAll("section").forEach(section => {
+  observer.observe(section);
+});
+
 });
