@@ -223,6 +223,7 @@ body::after {
   padding: 2rem 5%;
   mix-blend-mode: difference;
   z-index: 100;
+  line-height: 1.2;
 }
 .header-inner {
   display: flex;
@@ -244,6 +245,7 @@ body::after {
   font-size: 1.2rem;
   font-weight: 400;
   transition: color 0.3s;
+  line-height: 1.2;
 }
 .work-item {
   position: relative;
@@ -258,8 +260,14 @@ body::after {
 .work-link:hover .work-overlay {
   opacity: 1;
 }
+.work-link:hover .work-overlay::before {
+  opacity: 1;
+}
 .work-link:hover .work-image-placeholder {
   transform: scale(1.05);
+}
+.work-link:hover .view-more {
+  opacity: 1;
 }
 .work-info {
   display: flex;
@@ -272,10 +280,14 @@ body::after {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.3);
-  display: flex;
   align-items: center;
   justify-content: center;
+}
+.work-overlay::before {
+  position: absolute;
+  content: "";
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
   opacity: 0;
   transition: opacity 0.3s;
 }
@@ -286,20 +298,33 @@ body::after {
 }
 
 .view-more {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  display: inline-block;
+  opacity: 0;
   border: 1px solid white;
-  padding: 0.5rem 1.5rem;
+  padding: 0.4rem 1.8rem;
   border-radius: 50px;
-  font-size: 0.8rem;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  -webkit-backdrop-filter: blur(5px);
-          backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(8px);
+          backdrop-filter: blur(8px);
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
 }
 
 .works-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 4rem 2rem;
+  gap: 3.5rem 2rem;
 }
 
 .work-image-container {
@@ -437,8 +462,21 @@ section.in-view {
 
 /* Responsive */
 @media (max-width: 768px) {
+  .header {
+    padding: 1.5rem 5%;
+  }
+  .logo {
+    font-size: 1rem;
+    width: 35%;
+  }
+  .nav ul {
+    gap: 1.2em;
+  }
   .hero-title {
     font-size: 3.5rem;
+  }
+  .hero-profile {
+    font-size: 1rem;
   }
   .works-grid {
     grid-template-columns: 1fr;
