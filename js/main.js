@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     {
       title:"KINEEL",
-      category:"OFFICIAL SITE & ONLINE SHOP(futureshop) / WordPress",
+      category:"OFFICIAL SITE & ONLINE SHOP / futureshop / WordPress",
       url:"https://www.kineel.jp/",
       img:"img/work-06.jpg"
     },
