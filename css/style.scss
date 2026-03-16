@@ -392,6 +392,7 @@ body {
 		font-size: 1.8rem;
 		font-family: var(--font-serif);
 		letter-spacing: .05em;
+		line-height: 1;
 		transition: opacity 0.3s;
 		display: inline-block;
 		&::after {
@@ -470,6 +471,12 @@ section {
 	}
 	.hero-profile{
 		font-size: 1rem;
+	}
+	section{
+		padding: 6rem 0;
+	}
+	.section-title {
+		margin-bottom: 3rem;
 	}
 	.works-grid {
 		grid-template-columns: 1fr;
