@@ -394,7 +394,10 @@ body {
 		letter-spacing: .05em;
 		line-height: 1;
 		transition: opacity 0.3s;
-		display: inline-block;
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		width: fit-content;
 		&::after {
 			content: '';
 			position: absolute;
@@ -410,6 +413,34 @@ body {
 			&::after {
 				width: 100%;
 			}
+			.arrow{
+				// transform: rotate(0deg);
+				opacity: 1;
+			}
+		}
+	}
+	.arrow {
+		position: relative;
+		display: inline-block;
+		width: 30px;
+		height: 1px;
+		margin-top: 5px;
+		border-radius: 999px;
+		background-color: var(--accent-color);
+		transition: opacity .3s var(--easing);
+		transform: rotate(-30deg);
+		opacity: 0.3;
+		&::before {
+			content: "";
+			position: absolute;
+			top: calc(50% - 2px);
+			right: 0;
+			width: 8px;
+			height: 100%;
+			border-radius: 999px;
+			background-color: var(--accent-color);
+			transform: rotate(45deg);
+			transform-origin: calc(100% - 2px) 50%;
 		}
 	}
 }

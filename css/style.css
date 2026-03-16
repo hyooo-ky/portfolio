@@ -406,7 +406,12 @@ body::after {
   letter-spacing: 0.05em;
   line-height: 1;
   transition: opacity 0.3s;
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 .contact-link::after {
   content: "";
@@ -423,6 +428,33 @@ body::after {
 }
 .contact-link:hover::after {
   width: 100%;
+}
+.contact-link:hover .arrow {
+  opacity: 1;
+}
+.contact .arrow {
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 1px;
+  margin-top: 5px;
+  border-radius: 999px;
+  background-color: var(--accent-color);
+  transition: opacity 0.3s var(--easing);
+  transform: rotate(-30deg);
+  opacity: 0.3;
+}
+.contact .arrow::before {
+  content: "";
+  position: absolute;
+  top: calc(50% - 2px);
+  right: 0;
+  width: 8px;
+  height: 100%;
+  border-radius: 999px;
+  background-color: var(--accent-color);
+  transform: rotate(45deg);
+  transform-origin: calc(100% - 2px) 50%;
 }
 
 /* Sections */
