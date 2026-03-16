@@ -52,6 +52,24 @@ document.addEventListener("DOMContentLoaded", () => {
       category:"OFFICIAL SITE / WordPress",
       url:"https://yuikuen.com/",
       img:"img/work-08.jpg"
+    },
+    {
+      title:"YANMAR",
+      category:"RECRUIT SITE",
+      url:"https://www.yanmar.com/jp/recruit/new_graduate/people/interview/",
+      img:"img/work-09.jpg"
+    },
+    {
+      title:"CHUDEN CTI",
+      category:"RECRUIT SITE",
+      url:"https://www.cti.co.jp/recruit/fresh/",
+      img:"img/work-10.jpg"
+    },
+    {
+      title:"AKAKABE",
+      category:"RECRUIT SITE",
+      url:"https://www.akakabe.com/ippan-recruit/",
+      img:"img/work-11.jpg"
     }
   ];
 
