@@ -174,9 +174,9 @@ body {
 
 .scroll {
 	transform: rotate(90deg);
-	transform-origin: bottom left;
+	transform-origin: bottom right;
 	position: absolute;
-	right: 5%;
+	right: 6%;
 	bottom: 0;
 	&-indicator{
 		position: absolute;
