@@ -183,7 +183,7 @@ body::after {
   transform: rotate(90deg);
   transform-origin: bottom left;
   position: absolute;
-  left: 5%;
+  right: 5%;
   bottom: 0;
 }
 .scroll-indicator {
@@ -501,6 +501,10 @@ section.in-view {
   .logo {
     font-size: 1rem;
     width: 35%;
+  }
+  .scroll {
+    right: auto;
+    left: 5%;
   }
   .nav ul {
     gap: 1.2em;

@@ -176,7 +176,7 @@ body {
 	transform: rotate(90deg);
 	transform-origin: bottom left;
 	position: absolute;
-	left: 5%;
+	right: 5%;
 	bottom: 0;
 	&-indicator{
 		position: absolute;
@@ -491,6 +491,10 @@ section {
 	.logo{
 		font-size: 1rem;
 		width: 35%;
+	}
+	.scroll{
+		right: auto;
+		left: 5%;
 	}
 	.nav{
 		ul{
