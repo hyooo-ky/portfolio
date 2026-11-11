@@ -1,0 +1,8 @@
+{
+  "name": "hyooo-ky-portfolio",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "build:works": "node scripts/build.mjs --works-only"
+  }
+}

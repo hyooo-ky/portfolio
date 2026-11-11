@@ -445,19 +445,19 @@ body {
 	}
 }
 
-/* Sections */
+/* Sections: visible by default; JavaScript enhances offscreen sections. */
 section {
-	padding: 8rem 0;
-	position: relative;
-	opacity: 0;
-	transform: translateY(20px);
-	transition:
-    opacity 2s cubic-bezier(0.19,1,0.22,1),
-    transform 2s cubic-bezier(0.19,1,0.22,1);
-	&.in-view {
-		opacity: 1;
-		transform: translateY(0);
-	}
+    padding: 8rem 0;
+    position: relative;
+}
+section.reveal-pending {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 2s var(--easing), transform 2s var(--easing);
+}
+section.reveal-pending.in-view {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* cursor hover */
@@ -565,4 +565,15 @@ section {
 		transform: scaleX(0);
 		transform-origin: right;
 	}
+}
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal-text, .hero-profile, .scroll-indicator,
+    section.reveal-pending {
+        opacity: 1;
+        transform: none;
+        animation: none;
+        transition: none;
+    }
+    .scroll-indicator .line { animation: none; }
 }
