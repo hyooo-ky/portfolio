@@ -12,7 +12,7 @@
   "title": "EXAMPLE",
   "category": "CORPORATE SITE / WordPress",
   "url": "https://example.com/",
-  "img": "img/work-12.jpg"
+  "img": "img/work-12.webp"
 }
 ```
 
@@ -57,3 +57,7 @@ Cloudflareの対象Worker `portfolio` の設定から、Build / Builds → Branc
 ## GitHub Pages
 
 GitHub Pages側は、コミットしたルートの `index.html` を引き続き使えます。JSONだけ更新してHTMLを生成し忘れるとGitHub Pagesには反映されないため、必ずビルド後の `index.html` もコミットしてください。
+
+## 画像の軽量化
+
+既存の実績画像11件とプロフィール画像は、寸法を維持したWebP（品質85）で配信します。元のJPEGは再変換用として残しています。実績追加時も可能であればWebPを使い、JSONには実際に公開する画像のパスを指定してください。OGP・アイコン・背景ノイズは今回変更していません。

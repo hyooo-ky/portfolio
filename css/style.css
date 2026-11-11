@@ -392,7 +392,7 @@ body::after {
   line-height: 1;
   transition: opacity 0.3s;
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 10px;
   width: fit-content;
 }
@@ -420,11 +420,10 @@ body::after {
   display: inline-block;
   width: 30px;
   height: 1px;
-  margin-top: 5px;
   border-radius: 999px;
   background-color: var(--accent-color);
   transition: opacity 0.3s var(--easing);
-  transform: rotate(-30deg);
+  transform: none;
   opacity: 0.3;
 }
 .contact .arrow::before {
