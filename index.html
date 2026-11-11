@@ -222,7 +222,7 @@
                         </a>
                     </article>
                     <article class="work-item">
-                        <a href="https://www.cti.co.jp/recruit/fresh/" target="_blank" rel="noopener noreferrer" class="work-link">
+                        <a href="img/chuden-cti-archive.webp" data-preview-image="img/chuden-cti-archive.webp" data-preview-title="CHUDEN CTI" aria-haspopup="dialog" target="_blank" rel="noopener noreferrer" class="work-link">
                             <div class="work-image-container">
                                 <div class="work-image-placeholder">
                                     <img src="img/work-10.webp" alt="CHUDEN CTI" loading="lazy">
@@ -292,6 +292,15 @@
 	<footer class="footer">
 		<p>© All rights reserved. Katsuya Hyodo Portfolio</p>
 	</footer>
+    <dialog class="work-preview" id="workPreview" aria-labelledby="workPreviewTitle">
+        <div class="work-preview-header">
+            <h2 id="workPreviewTitle">旧サイトの制作実績</h2>
+            <button type="button" class="work-preview-close" aria-label="画像プレビューを閉じる">閉じる ×</button>
+        </div>
+        <div class="work-preview-scroll" tabindex="0" role="region" aria-label="旧サイト画像（縦にスクロールできます）">
+            <img class="work-preview-image" alt="">
+        </div>
+    </dialog>
 	<script type="module" src="./js/main.js"></script>
 </body>
 

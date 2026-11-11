@@ -1,4 +1,35 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const preview = document.getElementById("workPreview");
+  if (preview && typeof preview.showModal === "function") {
+    const image = preview.querySelector(".work-preview-image");
+    const scroll = preview.querySelector(".work-preview-scroll");
+    const title = preview.querySelector("#workPreviewTitle");
+    let opener;
+    document.addEventListener("click", event => {
+      const link = event.target.closest("a[data-preview-image]");
+      if (!link || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      image.src = link.dataset.previewImage;
+      image.alt = `${link.dataset.previewTitle} 旧サイトの全体画像`;
+      title.textContent = `${link.dataset.previewTitle} — 旧サイト`;
+      opener = link;
+      preview.showModal();
+      event.preventDefault();
+      scroll.scrollTop = 0;
+      document.documentElement.classList.add("preview-open");
+    });
+    preview.querySelector(".work-preview-close").addEventListener("click", () => preview.close());
+    preview.addEventListener("click", event => {
+      if (event.target !== preview) return;
+      const rect = preview.getBoundingClientRect();
+      if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) preview.close();
+    });
+    preview.addEventListener("close", () => {
+      document.documentElement.classList.remove("preview-open");
+      image.removeAttribute("src");
+      opener?.focus({ preventScroll: true });
+    });
+  }
+
 
   /* -----------------------------
   Custom Cursor
