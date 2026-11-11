@@ -22,6 +22,15 @@ try {
     if (!/^img\/(?!.*(?:^|\/)\.\.(?:\/|$))[^\\?#]+$/.test(work.img)) {
       throw new Error(`Work ${i + 1}: image must be a local file under img/.`);
     }
+    if (work.roles !== undefined && (!Array.isArray(work.roles) || work.roles.some(role => typeof role !== 'string' || !role.trim()))) {
+      throw new Error(`Work ${i + 1}: roles must contain non-empty strings.`);
+    }
+    if (work.archiveImage !== undefined) {
+      if (typeof work.archiveImage !== 'string' || !/^img\/(?!.*(?:^|\/)\.\.(?:\/|$))[^\\?#]+$/.test(work.archiveImage)) {
+        throw new Error(`Work ${i + 1}: archiveImage must be a local file under img/.`);
+      }
+      await access(path.join(root, work.archiveImage));
+    }
     await access(path.join(root, work.img));
   }
 
@@ -29,8 +38,14 @@ try {
     const { title, category, url, img } = Object.fromEntries(
       Object.entries(work).map(([key, value]) => [key, typeof value === 'string' ? escape(value) : value])
     );
+    const tags = (work.roles ?? []).length
+      ? `<ul class="work-tags" aria-label="担当範囲">${work.roles.map(role => `<li class="work-tag">${escape(role)}</li>`).join('')}</ul>`
+      : '';
+    const link = work.archiveImage
+      ? `href="${escape(work.archiveImage)}" data-preview-image="${escape(work.archiveImage)}" data-preview-title="${title}" aria-haspopup="dialog"`
+      : `href="${url}"`;
     return `                    <article class="work-item">
-                        <a href="${url}" target="_blank" rel="noopener noreferrer" class="work-link">
+                        <a ${link} target="_blank" rel="noopener noreferrer" class="work-link">
                             <div class="work-image-container">
                                 <div class="work-image-placeholder">
                                     <img src="${img}" alt="${title}" loading="lazy">
@@ -40,6 +55,7 @@ try {
                             <div class="work-info">
                                 <p class="work-category">${category}</p>
                                 <h3 class="work-title">${title}</h3>
+                                ${tags}
                             </div>
                         </a>
                     </article>`;
