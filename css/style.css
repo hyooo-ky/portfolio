@@ -599,8 +599,8 @@ html.preview-open {
 .work-preview {
   width: 70vw;
   max-width: none;
-  max-height: 85vh;
-  max-height: 85dvh;
+  max-height: calc(100vh - 128px);
+  max-height: calc(100dvh - 128px);
   margin: auto;
   padding: 0;
   border: 0;
@@ -613,15 +613,15 @@ html.preview-open {
 }
 .work-preview-close {
   position: absolute;
-  top: -22px;
-  right: max(-22px, -3vw);
+  top: -52px;
+  right: -12px;
   z-index: 1;
   width: 44px;
   height: 44px;
   padding: 0;
-  border: 1px solid #666;
-  border-radius: 50%;
-  background: #191919;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
   color: #fff;
   cursor: pointer;
 }
@@ -641,15 +641,15 @@ html.preview-open {
   transform: translate(-50%, -50%) rotate(-45deg);
 }
 .work-preview-close:hover {
-  background: #333;
+  color: var(--accent-color);
 }
 .work-preview-close:focus-visible {
   outline: 2px solid var(--accent-color);
   outline-offset: 3px;
 }
 .work-preview-scroll {
-  max-height: 85vh;
-  max-height: 85dvh;
+  max-height: calc(100vh - 128px);
+  max-height: calc(100dvh - 128px);
   overflow-y: auto;
   overscroll-behavior: contain;
   background: white;
