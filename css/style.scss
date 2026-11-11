@@ -575,3 +575,21 @@ section.reveal-pending.in-view {
     }
     .scroll-indicator .line { animation: none; }
 }
+
+/* Work responsibilities */
+.work-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .45rem;
+    margin-top: .4rem;
+}
+.work-tag {
+    padding: .2rem .65rem;
+    border: 1px solid rgba(218, 220, 155, .65);
+    border-radius: 999px;
+    background: rgba(218, 220, 155, .04);
+    color: var(--accent-color);
+    font-family: var(--font-jp);
+    font-size: .7rem;
+    line-height: 1.5;
+}

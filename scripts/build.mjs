@@ -22,6 +22,9 @@ try {
     if (!/^img\/(?!.*(?:^|\/)\.\.(?:\/|$))[^\\?#]+$/.test(work.img)) {
       throw new Error(`Work ${i + 1}: image must be a local file under img/.`);
     }
+    if (work.roles !== undefined && (!Array.isArray(work.roles) || work.roles.some(role => typeof role !== 'string' || !role.trim()))) {
+      throw new Error(`Work ${i + 1}: roles must contain non-empty strings.`);
+    }
     await access(path.join(root, work.img));
   }
 
@@ -29,6 +32,9 @@ try {
     const { title, category, url, img } = Object.fromEntries(
       Object.entries(work).map(([key, value]) => [key, typeof value === 'string' ? escape(value) : value])
     );
+    const tags = (work.roles ?? []).length
+      ? `<ul class="work-tags" aria-label="担当範囲">${work.roles.map(role => `<li class="work-tag">${escape(role)}</li>`).join('')}</ul>`
+      : '';
     return `                    <article class="work-item">
                         <a href="${url}" target="_blank" rel="noopener noreferrer" class="work-link">
                             <div class="work-image-container">
@@ -40,6 +46,7 @@ try {
                             <div class="work-info">
                                 <p class="work-category">${category}</p>
                                 <h3 class="work-title">${title}</h3>
+                                ${tags}
                             </div>
                         </a>
                     </article>`;
