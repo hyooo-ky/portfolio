@@ -395,7 +395,7 @@ body {
 		line-height: 1;
 		transition: opacity 0.3s;
 		display: flex;
-		align-items: center;
+		align-items: baseline;
 		gap: 10px;
 		width: fit-content;
 		&::after {
@@ -423,7 +423,6 @@ body {
 		display: inline-block;
 		width: 30px;
 		height: 1px;
-		margin-top: 5px;
 		border-radius: 999px;
 		background-color: var(--accent-color);
 		transition: opacity .3s var(--easing);
