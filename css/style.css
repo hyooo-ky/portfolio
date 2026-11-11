@@ -424,7 +424,7 @@ body::after {
   border-radius: 999px;
   background-color: var(--accent-color);
   transition: opacity 0.3s var(--easing);
-  transform: rotate(-30deg);
+  transform: none;
   opacity: 0.3;
 }
 .contact .arrow::before {

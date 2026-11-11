@@ -414,7 +414,6 @@ body {
 				width: 100%;
 			}
 			.arrow{
-				// transform: rotate(0deg);
 				opacity: 1;
 			}
 		}
@@ -428,7 +427,7 @@ body {
 		border-radius: 999px;
 		background-color: var(--accent-color);
 		transition: opacity .3s var(--easing);
-		transform: rotate(-30deg);
+		transform: none;
 		opacity: 0.3;
 		&::before {
 			content: "";
