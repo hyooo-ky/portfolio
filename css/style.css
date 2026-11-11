@@ -643,9 +643,16 @@ html.preview-open {
 .work-preview-close:hover {
   color: var(--accent-color);
 }
+.work-preview-close {
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.work-preview-close:focus {
+  outline: none;
+  box-shadow: none;
+}
 .work-preview-close:focus-visible {
-  outline: 2px solid var(--accent-color);
-  outline-offset: 3px;
+  color: var(--accent-color);
 }
 .work-preview-scroll {
   max-height: calc(100vh - 128px);

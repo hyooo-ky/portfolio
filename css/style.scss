@@ -633,7 +633,10 @@ html.preview-open { overflow: hidden; }
         &::before { transform: translate(-50%, -50%) rotate(45deg); }
         &::after { transform: translate(-50%, -50%) rotate(-45deg); }
         &:hover { color: var(--accent-color); }
-        &:focus-visible { outline: 2px solid var(--accent-color); outline-offset: 3px; }
+        appearance: none;
+        -webkit-tap-highlight-color: transparent;
+        &:focus { outline: none; box-shadow: none; }
+        &:focus-visible { color: var(--accent-color); }
     }
     &-scroll {
         max-height: calc(100vh - 128px);
