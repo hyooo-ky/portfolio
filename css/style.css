@@ -599,46 +599,61 @@ html.preview-open {
 .work-preview {
   width: 70vw;
   max-width: none;
-  max-height: 90vh;
-  max-height: 90dvh;
+  max-height: 85vh;
+  max-height: 85dvh;
   margin: auto;
   padding: 0;
-  border: 1px solid #444;
-  border-radius: 8px;
-  background: #191919;
+  border: 0;
+  background: transparent;
   color: var(--text-color);
-  overflow: hidden;
+  overflow: visible;
 }
 .work-preview::backdrop {
   background: rgba(0, 0, 0, 0.8);
 }
-.work-preview-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  min-height: 4rem;
-  padding: 0.6rem 1rem;
-}
-.work-preview-header h2 {
-  font: 400 0.9rem var(--font-main);
-}
 .work-preview-close {
-  flex-shrink: 0;
-  min-height: 44px;
-  padding: 0.5rem;
-  border: 0;
-  background: transparent;
-  color: var(--accent-color);
-  font: inherit;
+  position: absolute;
+  top: -22px;
+  right: max(-22px, -3vw);
+  z-index: 1;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid #666;
+  border-radius: 50%;
+  background: #191919;
+  color: #fff;
   cursor: pointer;
 }
+.work-preview-close::before, .work-preview-close::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 2px;
+  background: currentColor;
+}
+.work-preview-close::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+.work-preview-close::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+.work-preview-close:hover {
+  background: #333;
+}
+.work-preview-close:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 3px;
+}
 .work-preview-scroll {
-  max-height: calc(90vh - 5rem);
-  max-height: calc(90dvh - 5rem);
+  max-height: 85vh;
+  max-height: 85dvh;
   overflow-y: auto;
   overscroll-behavior: contain;
   background: white;
+  border-radius: 4px;
 }
 .work-preview-image {
   display: block;

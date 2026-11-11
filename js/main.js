@@ -3,14 +3,13 @@ document.addEventListener("DOMContentLoaded", () => {
   if (preview && typeof preview.showModal === "function") {
     const image = preview.querySelector(".work-preview-image");
     const scroll = preview.querySelector(".work-preview-scroll");
-    const title = preview.querySelector("#workPreviewTitle");
     let opener;
     document.addEventListener("click", event => {
       const link = event.target.closest("a[data-preview-image]");
       if (!link || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
       image.src = link.dataset.previewImage;
       image.alt = `${link.dataset.previewTitle} 旧サイトの全体画像`;
-      title.textContent = `${link.dataset.previewTitle} — 旧サイト`;
+      preview.setAttribute("aria-label", `${link.dataset.previewTitle}の画像プレビュー`);
       opener = link;
       preview.showModal();
       event.preventDefault();

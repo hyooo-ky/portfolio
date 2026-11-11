@@ -599,41 +599,49 @@ html.preview-open { overflow: hidden; }
 .work-preview {
     width: 70vw;
     max-width: none;
-    max-height: 90vh;
-    max-height: 90dvh;
+    max-height: 85vh;
+    max-height: 85dvh;
     margin: auto;
     padding: 0;
-    border: 1px solid #444;
-    border-radius: 8px;
-    background: #191919;
+    border: 0;
+    background: transparent;
     color: var(--text-color);
-    overflow: hidden;
+    overflow: visible;
     &::backdrop { background: rgba(0, 0, 0, .8); }
-    &-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-        min-height: 4rem;
-        padding: .6rem 1rem;
-        h2 { font: 400 .9rem var(--font-main); }
-    }
     &-close {
-        flex-shrink: 0;
-        min-height: 44px;
-        padding: .5rem;
-        border: 0;
-        background: transparent;
-        color: var(--accent-color);
-        font: inherit;
+        position: absolute;
+        top: -22px;
+        right: max(-22px, -3vw);
+        z-index: 1;
+        width: 44px;
+        height: 44px;
+        padding: 0;
+        border: 1px solid #666;
+        border-radius: 50%;
+        background: #191919;
+        color: #fff;
         cursor: pointer;
+        &::before, &::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 2px;
+            background: currentColor;
+        }
+        &::before { transform: translate(-50%, -50%) rotate(45deg); }
+        &::after { transform: translate(-50%, -50%) rotate(-45deg); }
+        &:hover { background: #333; }
+        &:focus-visible { outline: 2px solid var(--accent-color); outline-offset: 3px; }
     }
     &-scroll {
-        max-height: calc(90vh - 5rem);
-        max-height: calc(90dvh - 5rem);
+        max-height: 85vh;
+        max-height: 85dvh;
         overflow-y: auto;
         overscroll-behavior: contain;
         background: white;
+        border-radius: 4px;
     }
     &-image { display: block; width: 100%; height: auto; }
 }
