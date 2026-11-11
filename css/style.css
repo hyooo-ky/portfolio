@@ -19,9 +19,9 @@ ul {
   --text-color: #eee;
   --text-muted: #888;
   --accent-color: #dadc9b;
-  --font-main: "Inter", sans-serif;
-  --font-jp: "Noto Sans JP", sans-serif;
-  --font-serif: "Cormorant Garamond", serif;
+  --font-main: 'Inter', sans-serif;
+  --font-jp: 'Noto Sans JP', sans-serif;
+  --font-serif: 'Cormorant Garamond', serif;
   --easing: cubic-bezier(0.19, 1, 0.22, 1);
   --transition-slow: 0.8s var(--easing);
   --transition-medium: 0.5s var(--easing);
@@ -98,16 +98,13 @@ body::after {
   display: inline-block;
   opacity: 0;
   transform: translateY(30px);
-  -webkit-animation: reveal 1s var(--easing) forwards;
-          animation: reveal 1s var(--easing) forwards;
+  animation: reveal 1s var(--easing) forwards;
 }
 .reveal-text:nth-of-type(2) {
-  -webkit-animation-delay: 0.2s;
-          animation-delay: 0.2s;
+  animation-delay: 0.2s;
 }
 .reveal-text:nth-of-type(3) {
-  -webkit-animation-delay: 0.3s;
-          animation-delay: 0.3s;
+  animation-delay: 0.3s;
 }
 
 .section-title {
@@ -133,15 +130,11 @@ body::after {
   top: 0;
   bottom: 0;
   right: -5%;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
   height: fit-content;
   margin: auto;
   font-weight: bold;
   color: #e5e7eb;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  user-select: none;
   opacity: 0.025;
   font-family: var(--font-serif);
   pointer-events: none;
@@ -174,8 +167,7 @@ body::after {
   font-size: 1.3rem;
   letter-spacing: 0.05em;
   opacity: 0;
-  -webkit-animation: fadeIn 1s var(--easing) 0.5s forwards;
-          animation: fadeIn 1s var(--easing) 0.5s forwards;
+  animation: fadeIn 1s var(--easing) 0.5s forwards;
   color: var(--text-muted);
 }
 
@@ -194,8 +186,7 @@ body::after {
   align-items: center;
   gap: 1rem;
   opacity: 0;
-  -webkit-animation: fadeIn 1s var(--easing) 1s forwards;
-          animation: fadeIn 1s var(--easing) 1s forwards;
+  animation: fadeIn 1s var(--easing) 1s forwards;
 }
 .scroll-indicator span {
   font-size: 0.8rem;
@@ -208,8 +199,7 @@ body::after {
   width: 60px;
   height: 1px;
   background-color: var(--text-color);
-  -webkit-animation: scrollLine 2s infinite cubic-bezier(0.77, 0, 0.175, 1);
-          animation: scrollLine 2s infinite cubic-bezier(0.77, 0, 0.175, 1);
+  animation: scrollLine 2s infinite cubic-bezier(0.77, 0, 0.175, 1);
   transform-origin: left;
   opacity: 0.6;
 }
@@ -301,11 +291,7 @@ body::after {
   position: absolute;
   inset: 0;
   margin: auto;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
   width: fit-content;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
   height: fit-content;
   display: inline-block;
   opacity: 0;
@@ -313,8 +299,7 @@ body::after {
   padding: 0.4rem 1.8rem;
   border-radius: 50px;
   text-transform: uppercase;
-  -webkit-backdrop-filter: blur(8px);
-          backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
   font-family: var(--font-serif);
   font-weight: 600;
   font-size: 0.9rem;
@@ -409,8 +394,6 @@ body::after {
   display: flex;
   align-items: center;
   gap: 10px;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
   width: fit-content;
 }
 .contact-link::after {
@@ -457,15 +440,19 @@ body::after {
   transform-origin: calc(100% - 2px) 50%;
 }
 
-/* Sections */
+/* Sections: visible by default; JavaScript enhances offscreen sections. */
 section {
   padding: 8rem 0;
   position: relative;
+}
+
+section.reveal-pending {
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 2s cubic-bezier(0.19, 1, 0.22, 1), transform 2s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: opacity 2s var(--easing), transform 2s var(--easing);
 }
-section.in-view {
+
+section.reveal-pending.in-view {
   opacity: 1;
   transform: translateY(0);
 }
@@ -542,44 +529,15 @@ section.in-view {
     text-align: left;
   }
 }
-@-webkit-keyframes reveal {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 @keyframes reveal {
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
-@-webkit-keyframes fadeIn {
-  to {
-    opacity: 0.7;
-  }
-}
 @keyframes fadeIn {
   to {
     opacity: 0.7;
-  }
-}
-@-webkit-keyframes scrollLine {
-  0% {
-    transform: scaleX(0);
-    transform-origin: left;
-  }
-  50% {
-    transform: scaleX(1);
-    transform-origin: left;
-  }
-  51% {
-    transform: scaleX(1);
-    transform-origin: right;
-  }
-  100% {
-    transform: scaleX(0);
-    transform-origin: right;
   }
 }
 @keyframes scrollLine {
@@ -600,4 +558,20 @@ section.in-view {
     transform-origin: right;
   }
 }
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal-text, .hero-profile, .scroll-indicator,
+  section.reveal-pending {
+    opacity: 1;
+    transform: none;
+    animation: none;
+    transition: none;
+  }
+  .scroll-indicator .line {
+    animation: none;
+  }
+}
+
 /*# sourceMappingURL=style.css.map */
