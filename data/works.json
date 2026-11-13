@@ -5,6 +5,8 @@
     "url": "https://www.shigatsusya.jp/",
     "img": "img/work-01.webp",
     "roles": [
+      "ディレクション",
+      "構成設計",
       "デザイン",
       "コーディング",
       "CMS構築"
@@ -71,8 +73,7 @@
     "img": "img/work-07.webp",
     "roles": [
       "デザイン",
-      "コーディング",
-      "CMS構築"
+      "コーディング"
     ]
   },
   {
@@ -81,9 +82,8 @@
     "url": "https://yuikuen.com/",
     "img": "img/work-08.webp",
     "roles": [
-      "下層デザイン",
-      "コーディング",
-      "CMS構築"
+      "デザイン",
+      "コーディング"
     ]
   },
   {
