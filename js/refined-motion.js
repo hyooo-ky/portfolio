@@ -18,7 +18,7 @@ function configureMotion() {
         element.classList.add('detail-in-view');
 
       }
-    }, { rootMargin: '0px 0px 80px 0px' });
+    }, { rootMargin: '0px 0px -45px 0px' });
     document.querySelectorAll('.section-title').forEach(element => observer.observe(element));
     const columnsByGrid = new Map();
     cards.forEach((card, index) => {
@@ -26,7 +26,7 @@ function configureMotion() {
       if (card.getBoundingClientRect().top < window.innerHeight) return;
       const grid = card.parentElement;
       if (!columnsByGrid.has(grid)) columnsByGrid.set(grid, getComputedStyle(grid).gridTemplateColumns.split(' ').length);
-      card.style.setProperty('--card-delay', `${(index % columnsByGrid.get(grid)) * 45}ms`);
+      card.style.setProperty('--card-delay', `${180 + (index % columnsByGrid.get(grid)) * 90}ms`);
       card.classList.add('motion-card-pending');
       observer.observe(card);
     });

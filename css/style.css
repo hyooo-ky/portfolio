@@ -688,7 +688,7 @@ html.preview-open {
   .motion-card-pending {
     opacity: 0;
     transform: translate3d(0, 16px, 0);
-    transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1), transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1), transform 1.15s cubic-bezier(0.22, 1, 0.36, 1);
     transition-delay: var(--card-delay, 0ms);
   }
   .motion-card-pending.detail-in-view, .motion-card-pending:focus-within {
