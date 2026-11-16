@@ -70,6 +70,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }, { rootMargin: "0px 0px -80px 0px", threshold: 0 });
 
       document.querySelectorAll("section").forEach(section => {
+        // Works cards have their own entrance: avoid stacking two transforms.
+        if (section.id === "works" && document.documentElement.classList.contains("refined-motion")) return;
         // Only enhance offscreen content; the default HTML stays visible.
         if (section.getBoundingClientRect().top >= window.innerHeight) {
           observer.observe(section);
