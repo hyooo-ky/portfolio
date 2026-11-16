@@ -736,6 +736,9 @@ html.preview-open {
     transform: translateX(6px);
     opacity: 1;
   }
+  .refined-motion .contact-link:focus-visible::after {
+    width: calc(100% + 6px);
+  }
 }
 @media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) {
   .refined-motion .work-link {
@@ -756,6 +759,9 @@ html.preview-open {
   .refined-motion .contact-link:hover .arrow {
     transform: translateX(6px);
     opacity: 1;
+  }
+  .refined-motion .contact-link:hover::after {
+    width: calc(100% + 6px);
   }
 }
 .reading-progress {

@@ -684,6 +684,7 @@ html.preview-open { overflow: hidden; }
         .work-link:focus-visible .view-more { opacity: 1; transform: translateY(0); }
         .contact .arrow { transition: transform .5s var(--easing), opacity .3s; }
         .contact-link:focus-visible .arrow { transform: translateX(6px); opacity: 1; }
+        .contact-link:focus-visible::after { width: calc(100% + 6px); }
     }
     @media (hover: hover) and (pointer: fine) {
         .refined-motion {
@@ -693,6 +694,7 @@ html.preview-open { overflow: hidden; }
             .work-link:hover .work-title { color: var(--accent-color); }
             .work-link:hover .view-more { transform: translateY(0); }
             .contact-link:hover .arrow { transform: translateX(6px); opacity: 1; }
+            .contact-link:hover::after { width: calc(100% + 6px); }
         }
     }
 }
