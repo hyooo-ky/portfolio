@@ -651,3 +651,54 @@ html.preview-open { overflow: hidden; }
 @media (max-width: 768px) {
     .work-preview { width: 90vw; }
 }
+
+/* Refined details: optional, restrained motion. */
+@media (prefers-reduced-motion: no-preference) {
+    .refined-motion {
+        .hero-title .reveal-text {
+            animation-name: editorialReveal;
+            animation-duration: 1.25s;
+            animation-timing-function: cubic-bezier(.22, 1, .36, 1);
+        }
+        .section-title::after {
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 1.1s cubic-bezier(.22, 1, .36, 1) .12s;
+        }
+        .section-title.detail-in-view::after { transform: scaleX(1); }
+        .nav a { transition: opacity .3s, color .3s; }
+        .nav a.is-current { opacity: 1; color: var(--accent-color); }
+        .nav a.is-current::after { width: 100%; background: var(--accent-color); }
+        .work-image-placeholder { transition: transform .85s cubic-bezier(.22, 1, .36, 1); }
+        .work-overlay::before { background: rgba(0, 0, 0, .28); transition: opacity .5s; }
+        .view-more { transform: translateY(8px); transition: opacity .4s, transform .5s; }
+        .work-link:focus-visible .view-more { opacity: 1; transform: translateY(0); }
+        .contact .arrow { transition: transform .5s var(--easing), opacity .3s; }
+        .contact-link:focus-visible .arrow { transform: translateX(6px); opacity: 1; }
+    }
+    @media (hover: hover) and (pointer: fine) {
+        .refined-motion {
+            .work-link { transition: transform .6s var(--easing); }
+            .work-link:hover { transform: translateY(-4px); }
+            .work-link:hover .work-image-placeholder { transform: scale(1.035); }
+            .work-link:hover .work-title { color: var(--accent-color); }
+            .work-link:hover .view-more { transform: translateY(0); }
+            .contact-link:hover .arrow { transform: translateX(6px); opacity: 1; }
+        }
+    }
+}
+.reading-progress {
+    position: fixed;
+    inset: 0 0 auto;
+    height: 2px;
+    background: var(--accent-color);
+    opacity: .65;
+    transform: scaleX(0);
+    transform-origin: left;
+    pointer-events: none;
+    z-index: 101;
+}
+@keyframes editorialReveal {
+    from { opacity: 0; clip-path: inset(0 0 100% 0); transform: translateY(32px); }
+    to { opacity: 1; clip-path: inset(0); transform: translateY(0); }
+}
