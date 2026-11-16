@@ -5,7 +5,6 @@ let cleanup = () => {};
 function configureMotion() {
   cleanup();
   if (reduced.matches) return;
-  const animations = new Set();
   const root = document.documentElement;
   root.classList.add('refined-motion');
   const cards = [...document.querySelectorAll('.work-item')];
@@ -17,18 +16,20 @@ function configureMotion() {
         const element = entry.target;
         observer.unobserve(element);
         element.classList.add('detail-in-view');
-        if (element.matches('.work-item') && typeof element.animate === 'function') {
-          const columns = getComputedStyle(element.parentElement).gridTemplateColumns.split(' ').length;
-          const animation = element.animate([
-            { opacity: 0, transform: 'translateY(24px)' },
-            { opacity: 1, transform: 'translateY(0)' },
-          ], { duration: 850, delay: (cards.indexOf(element) % columns) * 65, easing: 'cubic-bezier(.22,1,.36,1)', fill: 'backwards' });
-          animations.add(animation);
-          animation.finished.then(() => animations.delete(animation)).catch(() => {});
-        }
+
       }
-    }, { rootMargin: '0px 0px -28px 0px' });
-    document.querySelectorAll('.section-title, .work-item').forEach(element => observer.observe(element));
+    }, { rootMargin: '0px 0px 80px 0px' });
+    document.querySelectorAll('.section-title').forEach(element => observer.observe(element));
+    const columnsByGrid = new Map();
+    cards.forEach((card, index) => {
+      // Never hide a card that is already visible (including restored scroll positions).
+      if (card.getBoundingClientRect().top < window.innerHeight) return;
+      const grid = card.parentElement;
+      if (!columnsByGrid.has(grid)) columnsByGrid.set(grid, getComputedStyle(grid).gridTemplateColumns.split(' ').length);
+      card.style.setProperty('--card-delay', `${(index % columnsByGrid.get(grid)) * 45}ms`);
+      card.classList.add('motion-card-pending');
+      observer.observe(card);
+    });
     observers.push(observer);
   }
 
@@ -61,13 +62,13 @@ function configureMotion() {
   cleanup = () => {
     root.classList.remove('refined-motion');
     observers.forEach(observer => observer.disconnect());
-    animations.forEach(animation => animation.cancel());
     window.removeEventListener('scroll', schedule);
     window.removeEventListener('resize', schedule);
     cancelAnimationFrame(frame);
     progress.remove();
     links.forEach(link => { link.classList.remove('is-current'); link.removeAttribute('aria-current'); });
     document.querySelectorAll('.detail-in-view').forEach(element => element.classList.remove('detail-in-view'));
+    cards.forEach(card => { card.classList.remove('motion-card-pending'); card.style.removeProperty('--card-delay'); });
   };
 }
 configureMotion();
