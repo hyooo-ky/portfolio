@@ -1166,8 +1166,9 @@ body.theme-graphic {
     animation-delay: 0.24s;
   }
   .hero-profile {
-    animation: profileIn 1s ease both;
-    animation-delay: 0.55s;
+    animation: none;
+    opacity: 1;
+    transform: none;
   }
 }
 @keyframes titleIn {
