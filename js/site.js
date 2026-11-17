@@ -1,5 +1,5 @@
 
-const media = matchMedia('(prefers-reduced-motion: reduce)');
+import { motion as media } from './motion.js?v=motion28';
 const header = document.querySelector('.header');
 const art = document.querySelector('.background-object');
 if(art) {
@@ -54,7 +54,7 @@ function reveal(){
     observer.observe(e);
   });
 }
-reveal();media.addEventListener('change',()=>{reveal();if(media.matches&&art){art.style.setProperty('--art-y','0px');art.style.setProperty('--art-x','0px');art.style.setProperty('--art-scale','1');}});
+reveal();media.addEventListener('change',()=>{reveal();if(media.matches&&art){art.style.setProperty('--art-y','0px');art.style.setProperty('--art-x','0px');art.style.setProperty('--art-scroll-x','0px');art.style.setProperty('--art-scale','1');}});
 document.addEventListener('focusin',e=>e.target.closest('.motion-pending')?.classList.add('is-visible'));
 document.addEventListener('click',e=>{
   const a=e.target.closest('a[href^="#"]');if(!a)return;
