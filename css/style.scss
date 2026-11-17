@@ -96,3 +96,15 @@ body.theme-graphic{--paper:#f5f0d5;--ink:#161616;--accent:#3331ff;--line:#c7c2a9
 @media(max-width:600px){.theme-editorial .works{padding-top:230px;}}
 
 .theme-editorial .work-category { margin-bottom: -3px; }
+
+.theme-editorial .scroll-indicator span { letter-spacing: .08em; }
+.theme-editorial .hero-profile .type-char {
+    white-space: pre; font-weight: inherit; opacity: 0;
+    animation: profileType .01s steps(1,end) forwards;
+    animation-delay: calc(.35s + var(--char) * .055s);
+}
+.theme-editorial .hero-profile > .type-char { font-weight: 400; }
+@keyframes profileType { to { opacity: 1; } }
+@media(prefers-reduced-motion:reduce){
+    .theme-editorial .hero-profile .type-char { opacity: 1; animation: none; }
+}
