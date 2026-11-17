@@ -108,3 +108,11 @@ body.theme-graphic{--paper:#f5f0d5;--ink:#161616;--accent:#3331ff;--line:#c7c2a9
 @media(prefers-reduced-motion:reduce){
     .theme-editorial .hero-profile .type-char { opacity: 1; animation: none; }
 }
+
+/* Hide both the fallback and canvas until the title entrance is complete. */
+.theme-editorial .hero-art { visibility: hidden; }
+.theme-editorial .hero-art.art-intro-ready {
+    visibility: visible;
+    animation: objectIntro .6s ease-out backwards;
+}
+@keyframes objectIntro { from { opacity: 0; } }

@@ -1386,3 +1386,18 @@ body.theme-graphic {
     animation: none;
   }
 }
+/* Hide both the fallback and canvas until the title entrance is complete. */
+.theme-editorial .hero-art {
+  visibility: hidden;
+}
+
+.theme-editorial .hero-art.art-intro-ready {
+  visibility: visible;
+  animation: objectIntro 0.6s ease-out backwards;
+}
+
+@keyframes objectIntro {
+  from {
+    opacity: 0;
+  }
+}

@@ -2,7 +2,11 @@
 const media = matchMedia('(prefers-reduced-motion: reduce)');
 const header = document.querySelector('.header');
 const art = document.querySelector('.hero-art');
-if(art) document.body.append(art);
+if(art) {
+  document.body.append(art);
+  const titleAnimations=[...document.querySelectorAll('.hero-title .reveal-text')].flatMap(el=>el.getAnimations());
+  Promise.allSettled(titleAnimations.map(animation=>animation.finished)).then(()=>art.classList.add('art-intro-ready'));
+}
 const progress = document.createElement('div');
 progress.className = 'reading-progress';
 progress.setAttribute('aria-hidden','true');
