@@ -18,9 +18,9 @@
 <p class="note">ボタンを押すとON／OFFを切り替えられます。</p><a class="back" href="../../">ポートフォリオに戻る</a>
 </main>
 <script>
-const states=[...document.querySelectorAll('.motion-switch')].map(button=>({button,star:button.querySelector('.star'),enabled:button.getAttribute('aria-pressed')==='true',speed:button.getAttribute('aria-pressed')==='true'?22.5:0,angle:0}));
+const states=[...document.querySelectorAll('.motion-switch')].map(button=>({button,star:button.querySelector('.star'),enabled:button.getAttribute('aria-pressed')==='true',speed:button.getAttribute('aria-pressed')==='true'?30:0,angle:0}));
 let frame=0,last=0;
-function tick(time){frame=0;const dt=last?Math.min((time-last)/1000,.05):0;last=time;let moving=false;for(const s of states){const target=s.enabled?22.5:0;const rate=s.enabled ? .3 : .55;s.speed+=(target-s.speed)*(1-Math.exp(-dt/rate));if(!s.enabled&&s.speed<.025)s.speed=0;s.angle=(s.angle+s.speed*dt)%360;s.star.style.setProperty('--angle',s.angle+'deg');moving||=s.enabled||s.speed>0;}if(moving&&!document.hidden)frame=requestAnimationFrame(tick);}
+function tick(time){frame=0;const dt=last?Math.min((time-last)/1000,.05):0;last=time;let moving=false;for(const s of states){const target=s.enabled?30:0;const rate=s.enabled ? .3 : .55;s.speed+=(target-s.speed)*(1-Math.exp(-dt/rate));if(!s.enabled&&s.speed<.025)s.speed=0;s.angle=(s.angle+s.speed*dt)%360;s.star.style.setProperty('--angle',s.angle+'deg');moving||=s.enabled||s.speed>0;}if(moving&&!document.hidden)frame=requestAnimationFrame(tick);}
 function start(){if(!frame){last=0;frame=requestAnimationFrame(tick);}}
 for(const s of states)s.button.addEventListener('click',()=>{s.enabled=!s.enabled;s.button.setAttribute('aria-pressed',String(s.enabled));s.button.closest('.sample').querySelector('.state').textContent=s.enabled?'ON':'OFF';start();});
 document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnimationFrame(frame);frame=0;}else start();});start();
