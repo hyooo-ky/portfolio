@@ -1177,7 +1177,7 @@ body.theme-graphic {
     opacity: 0;
   }
   to {
-    clip-path: inset(-0.05em -0.1em -0.12em 0);
+    clip-path: inset(-0.15em -0.15em -0.35em -0.05em);
     opacity: 1;
   }
 }
@@ -1356,7 +1356,7 @@ body.theme-graphic {
   }
 }
 .theme-editorial .work-category {
-  margin-bottom: -3px;
+  margin-bottom: -5px;
 }
 
 .theme-editorial .scroll-indicator span {
@@ -1399,5 +1399,40 @@ body.theme-graphic {
 @keyframes objectIntro {
   from {
     opacity: 0;
+  }
+}
+.theme-editorial .hero-title .reveal-text {
+  line-height: 1.04;
+}
+
+.theme-editorial .section-title {
+  letter-spacing: -0.045em;
+}
+
+.theme-editorial .contact .section-title {
+  letter-spacing: -0.065em;
+}
+
+.theme-editorial .work-image-container {
+  isolation: isolate;
+}
+
+.theme-editorial .work-image-placeholder {
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.theme-editorial .work-overlay {
+  background: rgba(0, 0, 0, 0.1333333333);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+  transform: translateZ(0);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .theme-editorial .work-link:hover .work-overlay,
+  .theme-editorial .work-link:focus-visible .work-overlay {
+    opacity: 1;
   }
 }

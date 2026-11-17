@@ -4,8 +4,7 @@ const header = document.querySelector('.header');
 const art = document.querySelector('.hero-art');
 if(art) {
   document.body.append(art);
-  const titleAnimations=[...document.querySelectorAll('.hero-title .reveal-text')].flatMap(el=>el.getAnimations());
-  Promise.allSettled(titleAnimations.map(animation=>animation.finished)).then(()=>art.classList.add('art-intro-ready'));
+  setTimeout(()=>art.classList.add('art-intro-ready'),media.matches?0:Math.max(0,850-performance.now()));
 }
 const progress = document.createElement('div');
 progress.className = 'reading-progress';
