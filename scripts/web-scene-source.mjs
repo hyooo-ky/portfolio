@@ -1,5 +1,4 @@
 import * as THREE from 'three';
-import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
 export async function mountWebScene(container, reducedMotion) {
   let renderer;
@@ -13,12 +12,20 @@ export async function mountWebScene(container, reducedMotion) {
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(37, 1, .1, 40);
   camera.position.z = 8.3;
-  const pmrem = new THREE.PMREMGenerator(renderer);
-  const room = new RoomEnvironment();
-  // A 64px reflection cubemap is enough for these small, rough metallic panels.
-  const environment = pmrem.fromScene(room, .04, .1, 100, { size: 64 });
-  scene.environment = environment.texture;
-  room.dispose(); pmrem.dispose();
+  // Reuse the same baked reflection instead of rendering its lighting on each device.
+  if (!('DecompressionStream' in window)) { renderer.dispose(); return; }
+  const response = await fetch(new URL('../img/web-scene/reflection-v1.bin.gz', import.meta.url));
+  if (!response.ok) { renderer.dispose(); return; }
+  const buffer = await new Response(response.body.pipeThrough(new DecompressionStream('gzip'))).arrayBuffer();
+  const header = new DataView(buffer);
+  const width = header.getUint32(0,true), height = header.getUint32(4,true);
+  if (width!==336 || height!==256 || buffer.byteLength!==8+width*height*8) { renderer.dispose(); return; }
+  const environment = new THREE.DataTexture(new Uint16Array(buffer,8), width, height, THREE.RGBAFormat, THREE.HalfFloatType);
+  environment.mapping = THREE.CubeUVReflectionMapping;
+  environment.minFilter = THREE.LinearFilter;
+  environment.magFilter = THREE.LinearFilter;
+  environment.needsUpdate = true;
+  scene.environment = environment;
   const webScene = new THREE.Group(); scene.add(webScene);
   const metal = new THREE.MeshStandardMaterial({ color: 0xbfc6ce, metalness: .95, roughness: .22, transparent: true });
   const porcelain = new THREE.MeshStandardMaterial({ color: 0xf0f1f2, metalness: .28, roughness: .3, transparent: true });
@@ -61,9 +68,15 @@ export async function mountWebScene(container, reducedMotion) {
   for(let i=0;i<=4;i++){const y=-1.625+i*3.25/4;segments.push(-2.2,y,.01,2.2,y,.01);}
   const gridGeometry=new THREE.BufferGeometry();gridGeometry.setAttribute('position',new THREE.Float32BufferAttribute(segments,3));
   grid.add(new THREE.LineSegments(gridGeometry,gridMaterial));
+  // Identical grid dots share one geometry and one draw call.
+  const gridNodes = new THREE.InstancedMesh(new THREE.SphereGeometry(.035,10,6),nodesMaterial,35);
+  const nodeTransform = new THREE.Matrix4();
   for(let i=0;i<=6;i++)for(let j=0;j<=4;j++){
-    const node=new THREE.Mesh(new THREE.SphereGeometry(.035,10,6),nodesMaterial);node.position.set(-2.2+i*4.4/6,-1.625+j*3.25/4,.02);grid.add(node);
+    nodeTransform.makeTranslation(-2.2+i*4.4/6,-1.625+j*3.25/4,.02);
+    gridNodes.setMatrixAt(i*5+j,nodeTransform);
   }
+  gridNodes.instanceMatrix.needsUpdate=true;
+  grid.add(gridNodes);
   const wireMaterial=new THREE.LineBasicMaterial({color:0x666e7c,transparent:true});
   const wire=new THREE.Group();webScene.add(wire);
   for(const {mesh,z} of layers.slice(0,5)){
