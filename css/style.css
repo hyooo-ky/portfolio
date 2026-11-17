@@ -112,7 +112,6 @@ img {
 .nav ul {
   display: flex;
   gap: 30px;
-  counter-reset: nav;
 }
 
 .nav a {
@@ -121,16 +120,6 @@ img {
   font-weight: 600;
   display: block;
   padding: 7px 0;
-}
-
-.nav a::before {
-  counter-increment: nav;
-  content: "0" counter(nav);
-  font-size: 8px;
-  vertical-align: super;
-  margin-right: 7px;
-  font-weight: 400;
-  color: var(--muted);
 }
 
 .nav a::after {
@@ -983,9 +972,6 @@ body.theme-graphic {
   }
   .nav a {
     font-size: 10px;
-  }
-  .nav a::before {
-    display: none;
   }
   .container {
     width: 90%;
