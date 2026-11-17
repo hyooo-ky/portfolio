@@ -85,15 +85,11 @@ img {
   inset: 0 0 auto;
   z-index: 30;
   padding: 26px 4vw;
-  transition: padding 0.4s, background 0.4s, border-color 0.4s;
   border-bottom: 1px solid transparent;
 }
 
-.header.is-scrolled {
-  padding-block: 18px;
-  background: color-mix(in srgb, var(--paper) 94%, transparent);
-  backdrop-filter: blur(16px);
-  border-color: var(--line);
+.header.is-scrolled::before {
+  opacity: 1;
 }
 
 .header-inner {
@@ -961,9 +957,6 @@ body.theme-graphic {
   .header {
     padding: 20px 5vw;
   }
-  .header.is-scrolled {
-    padding: 15px 5vw;
-  }
   .logo, .theme-graphic .logo {
     font-size: 12px;
   }
@@ -1471,17 +1464,22 @@ html[data-motion=off] .theme-editorial .hero-profile .type-char {
 }
 
 .motion-toggle {
-  flex-shrink: 0;
-  margin-left: 6px;
-  width: 84px;
-  height: 36px;
-  padding: 0 11px;
+  position: fixed;
+  z-index: 40;
+  right: 0;
+  bottom: 80px;
+  margin: 0;
+  width: auto;
+  height: 44px;
+  padding: 0 14px 0 16px;
+  gap: 6px;
   display: inline-flex;
   align-items: center;
-  justify-content: space-between;
-  border: 1px solid var(--line);
-  border-radius: 24px;
-  background: var(--paper);
+  justify-content: flex-start;
+  border: 0;
+  border-radius: 24px 0 0 24px;
+  box-shadow: 0 6px 26px rgba(0, 0, 0, 0.0862745098);
+  background: white;
   color: var(--accent);
   cursor: pointer;
   transition: background 0.4s, border-color 0.4s, color 0.4s;
@@ -1554,23 +1552,11 @@ html[data-motion=off] .background-object {
 }
 
 @media (max-width: 600px) {
-  .header-inner {
-    gap: 8px;
-  }
-  .logo {
-    font-size: 11px;
-  }
-  .nav ul {
-    gap: 10px;
-  }
-  .nav a {
-    font-size: 9px;
-  }
   .motion-toggle {
-    margin-left: 0;
-    width: 70px;
-    height: 32px;
-    padding: 0 8px;
+    bottom: calc(52px + env(safe-area-inset-bottom, 0px));
+    height: 40px;
+    padding: 0 12px 0 14px;
+    gap: 5px;
   }
   .motion-toggle-star {
     width: 16px;
@@ -1594,4 +1580,21 @@ html[data-motion=off] .motion-toggle-track {
 
 html[data-motion=off] .motion-toggle-thumb {
   transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+/* Fade a separate header surface without changing header height or layout. */
+.header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: color-mix(in srgb, var(--paper) 94%, transparent);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--line);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.header-inner {
+  position: relative;
 }
