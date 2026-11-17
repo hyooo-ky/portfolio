@@ -16,6 +16,8 @@ function render() {
   progress.style.transform = 'scaleX(' + (scrollY / Math.max(1,document.documentElement.scrollHeight-innerHeight)) + ')';
   let current = sections[0]?.id;
   for (const s of sections) if (s.getBoundingClientRect().top < innerHeight * .4) current = s.id;
+  const lastSection=sections.at(-1);
+  if(lastSection && scrollY>0 && Math.ceil(scrollY+innerHeight)>=document.documentElement.scrollHeight-4 && lastSection.getBoundingClientRect().top<innerHeight) current=lastSection.id;
   nav.forEach(a => { if(a.hash === '#' + current) a.setAttribute('aria-current','location'); else a.removeAttribute('aria-current'); });
   if(art) {
     const phase = scrollY / Math.max(1,document.documentElement.scrollHeight-innerHeight);
