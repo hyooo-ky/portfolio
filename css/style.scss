@@ -24,3 +24,45 @@ body.theme-graphic{--paper:#f5f0d5;--ink:#161616;--accent:#3331ff;--line:#c7c2a9
 }
 @keyframes titleIn{from{clip-path:inset(0 0 100% 0);opacity:0}to{clip-path:inset(-.05em -.1em -.12em 0);opacity:1}}
 @keyframes profileIn{from{opacity:0;translate:0 10px}to{opacity:1;translate:0 0}}
+
+/* Editorial refinement: chrome sculpture, compact profile and precise arrow. */
+.theme-editorial .hero-art {
+    transform: translate3d(var(--art-x,0px),var(--art-y,0px),0) scale(var(--art-scale,1));
+}
+.theme-editorial .hero-art canvas {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    opacity: 0; transition: opacity .5s;
+}
+.theme-editorial .hero-art.sculpture-ready canvas { opacity: 1; }
+.theme-editorial .hero-art.sculpture-ready > img { opacity: 0; animation: none; }
+.theme-editorial .hero-art::after { opacity: .05; }
+.theme-editorial .about-photo {
+    grid-template-columns: 112px minmax(0,1fr);
+    align-items: center; gap: 24px;
+}
+.theme-editorial .about-photo > img { width: 112px; height: 112px; max-width: 112px; }
+.theme-editorial .about-name .en { font-size: 16px; }
+.theme-editorial .contact-link { gap: clamp(20px,3vw,46px); }
+.theme-editorial .contact .arrow {
+    width: clamp(32px,4vw,58px); height: 2px;
+    transform: none; position: relative;
+}
+.theme-editorial .contact .arrow::after {
+    position: absolute; right: 0; top: 50%; bottom: auto;
+    width: 12px; height: 12px;
+    border: 0; border-top: 2px solid currentColor; border-right: 2px solid currentColor;
+    transform: translateY(-50%) rotate(45deg); transform-origin: center;
+}
+@media (hover:hover) and (pointer:fine) {
+    .theme-editorial .contact-link:hover .arrow { transform: translateX(6px); }
+    .theme-editorial .contact-link:hover::after { width: calc(100% + 8px); }
+}
+@media (max-width:600px) {
+    .theme-editorial .about-photo { grid-template-columns: 88px minmax(0,1fr); gap: 20px; }
+    .theme-editorial .about-photo > img { width: 88px; height: 88px; max-width: 88px; }
+    .theme-editorial .about-name .en { font-size: 14px; }
+}
+
+.theme-editorial .hero-art { transform: translate3d(var(--art-x,0px),var(--art-y,0px),0) scale(var(--art-scale,1)); }
+.theme-editorial .hero-art canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.theme-editorial .hero-art.webgl-ready > img { visibility: hidden; }

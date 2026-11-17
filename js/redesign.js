@@ -16,7 +16,10 @@ function render() {
   let current = sections[0]?.id;
   for (const s of sections) if (s.getBoundingClientRect().top < innerHeight * .4) current = s.id;
   nav.forEach(a => { if(a.hash === '#' + current) a.setAttribute('aria-current','location'); else a.removeAttribute('aria-current'); });
-  if(art && !media.matches) art.style.setProperty('--art-y',Math.min(scrollY*.12,110)+'px');
+  if(art && !media.matches) {
+    art.style.setProperty('--art-y',Math.min(scrollY*.26,180)+'px');
+    art.style.setProperty('--art-scale',String(1-Math.min(scrollY/innerHeight,1)*.14));
+  }
 }
 function schedule(){ if(!frame) frame=requestAnimationFrame(render); }
 addEventListener('scroll',schedule,{passive:true});
@@ -37,7 +40,7 @@ function reveal(){
     observer.observe(e);
   });
 }
-reveal();media.addEventListener('change',()=>{reveal();if(media.matches&&art)art.style.setProperty('--art-y','0px');});
+reveal();media.addEventListener('change',()=>{reveal();if(media.matches&&art){art.style.setProperty('--art-y','0px');art.style.setProperty('--art-x','0px');art.style.setProperty('--art-scale','1');}});
 document.addEventListener('focusin',e=>e.target.closest('.motion-pending')?.classList.add('is-visible'));
 document.addEventListener('click',e=>{
   const a=e.target.closest('a[href^="#"]');if(!a)return;
@@ -76,3 +79,7 @@ if(art){
   },{passive:true});
   document.querySelector('#hero').addEventListener('pointerleave',()=>art.style.setProperty('--art-x','0px'));
 }
+
+if(art) import('./sculpture.js').then(module=>module.mountSculpture(art,media)).catch(()=>{});
+
+if(art) import('./sculpture.js').then(module=>module.mountSculpture(art,media)).catch(()=>{});
