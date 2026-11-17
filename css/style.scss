@@ -240,3 +240,20 @@ html[data-motion="off"] .motion-toggle-thumb { transition: transform .4s cubic-b
     html[data-motion="off"] .motion-toggle { transition: gap .35s, background .4s, border-color .4s, color .4s !important; }
     html[data-motion="off"] .motion-toggle-track { transition: width .35s, padding .35s, opacity .25s, background .4s !important; }
 }
+
+@media(hover:none), (pointer:coarse){
+    .motion-toggle { gap: 0; transition: gap .35s, background .4s, color .4s; }
+    .motion-toggle-star { flex-shrink: 0; }
+    .motion-toggle-track {
+        width: 0; padding-inline: 0; opacity: 0; overflow: hidden;
+        transition: width .35s, padding .35s, opacity .25s, background .4s;
+    }
+    .motion-toggle.is-expanded { gap: 6px; }
+    .motion-toggle.is-expanded .motion-toggle-track { width: 28px; padding-inline: 3px; opacity: 1; }
+    html[data-motion="off"] .motion-toggle { transition: gap .35s, background .4s, color .4s !important; }
+    html[data-motion="off"] .motion-toggle-track { transition: width .35s, padding .35s, opacity .25s, background .4s !important; }
+}
+@media(max-width:600px) and (hover:none), (max-width:600px) and (pointer:coarse){
+    .motion-toggle.is-expanded { gap: 5px; }
+    .motion-toggle.is-expanded .motion-toggle-track { width: 26px; }
+}

@@ -1,6 +1,6 @@
 import Lenis from './vendor/lenis.mjs';
 
-import { motion } from './motion.js?v=switch29';
+import { motion } from './motion.js?v=touch33';
 let lenis;
 
 function syncDialogState() {

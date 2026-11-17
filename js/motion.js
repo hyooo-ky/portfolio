@@ -34,7 +34,20 @@ function syncButton(){
   button.title=motion.matches?'アニメーションをONにする':'アニメーションをOFFにする';
   startRotation();
 }
-button?.addEventListener('click',()=>motion.setEnabled(motion.matches));
+const touchLayout=matchMedia('(hover: none), (pointer: coarse)');
+button?.addEventListener('click',()=>{
+  if(touchLayout.matches&&!button.classList.contains('is-expanded')){
+    button.classList.add('is-expanded');
+    return;
+  }
+  motion.setEnabled(motion.matches);
+});
+document.addEventListener('pointerdown',event=>{
+  if(button&&!button.contains(event.target))button.classList.remove('is-expanded');
+});
+document.addEventListener('keydown',event=>{
+  if(event.key==='Escape')button?.classList.remove('is-expanded');
+});
 motion.addEventListener('change',syncButton);
 addEventListener('storage',event=>{
   if(event.key==='portfolio-motion'){
