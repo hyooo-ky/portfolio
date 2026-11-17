@@ -177,11 +177,23 @@ html[data-motion="off"]{
 
 .nav { margin-left: auto; }
 .motion-toggle {
-    flex-shrink: 0; margin-left: 6px; padding: 7px 11px;
-    border: 1px solid var(--line); border-radius: 20px;
-    background: var(--paper); color: var(--ink); cursor: pointer;
-    font-size: 10px; line-height: 1.4; white-space: nowrap;
+    flex-shrink: 0; margin-left: 6px; width: 84px; height: 36px; padding: 0 11px;
+    display: inline-flex; align-items: center; justify-content: space-between;
+    border: 1px solid var(--line); border-radius: 24px;
+    background: var(--paper); color: var(--accent); cursor: pointer;
+    transition: background .4s, border-color .4s, color .4s;
 }
+.motion-toggle[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: white; }
+.motion-toggle-star {
+    display: block; width: 20px; height: 20px; background: currentColor;
+    -webkit-mask: url('../img/star-eight.svg') center / contain no-repeat;
+    mask: url('../img/star-eight.svg') center / contain no-repeat;
+    transform: rotate(var(--star-angle,0deg));
+}
+.motion-toggle-track { display: block; width: 28px; height: 16px; padding: 3px; border-radius: 10px; background: #d4d4cb; transition: background .4s; }
+.motion-toggle-thumb { display: block; width: 10px; height: 10px; border-radius: 50%; background: white; box-shadow: 0 1px 3px #0001; transition: transform .4s cubic-bezier(.22,1,.36,1); }
+.motion-toggle[aria-pressed="true"] .motion-toggle-track { background: #ffffff55; }
+.motion-toggle[aria-pressed="true"] .motion-toggle-thumb { transform: translateX(12px); }
 .motion-toggle[hidden] { display: none; }
 html[data-motion="off"] { scroll-behavior: auto; }
 html[data-motion="off"] *, html[data-motion="off"] *::before, html[data-motion="off"] *::after {
@@ -194,5 +206,13 @@ html[data-motion="off"] .background-object { transform: none !important; }
     .logo { font-size: 11px; }
     .nav ul { gap: 10px; }
     .nav a { font-size: 9px; }
-    .motion-toggle { margin-left: 0; padding: 6px 8px; font-size: 9px; }
+    .motion-toggle { margin-left: 0; width: 70px; height: 32px; padding: 0 8px; }
+    .motion-toggle-star { width: 18px; height: 18px; }
+    .motion-toggle-track { width: 26px; }
+    .motion-toggle[aria-pressed="true"] .motion-toggle-thumb { transform: translateX(10px); }
 }
+
+/* Keep feedback on the control itself while page animations are disabled. */
+html[data-motion="off"] .motion-toggle { transition: background .4s, border-color .4s, color .4s !important; }
+html[data-motion="off"] .motion-toggle-track { transition: background .4s !important; }
+html[data-motion="off"] .motion-toggle-thumb { transition: transform .4s cubic-bezier(.22,1,.36,1) !important; }
