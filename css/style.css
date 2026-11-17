@@ -1426,6 +1426,7 @@ body.theme-graphic {
 }
 
 .theme-editorial .contact .section-title {
+  font-size: clamp(76px, 14.5vw, 230px);
   letter-spacing: -0.065em;
 }
 
@@ -1466,4 +1467,18 @@ body.theme-graphic {
   clip-path: inset(50%);
   white-space: nowrap;
   border: 0;
+}
+
+.theme-editorial .work-tag {
+  background: var(--paper);
+}
+
+.theme-editorial .contact-link::after {
+  transition: width 0.55s cubic-bezier(0.22, 1, 0.36, 1), background 0.3s;
+}
+
+@media (max-width: 600px) {
+  .theme-editorial .contact .section-title {
+    font-size: 20vw;
+  }
 }
