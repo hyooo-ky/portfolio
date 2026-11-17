@@ -87,14 +87,15 @@ export function mountSculpture(container, reducedMotion) {
     for(const mat of [metal,porcelain,blue,pale]){mat.opacity=fill;mat.depthWrite=fill>.98;}
     for(const {mesh,z} of layers){mesh.visible=fill>.005;mesh.position.z=z+(1-fill)*(.25+z*2);}
     dots.forEach(dot=>dot.visible=fill>.005);
-    sculpture.rotation.set(-1.02+ease(0,.9,progress)*.47+(staticMode?0:pointerY*.08),-.22+(staticMode?0:pointerX*.14),-.13+progress*.08);
+    const page = staticMode ? 0 : scrollY / Math.max(1,document.documentElement.scrollHeight-innerHeight);
+    sculpture.rotation.set(-1.02+ease(0,.9,progress)*.47+(staticMode?0:pointerY*.08+Math.sin(page*Math.PI*2)*.10),-.22+(staticMode?0:pointerX*.14+Math.sin(page*Math.PI*2)*.32),-.13+progress*.08+Math.sin(page*Math.PI*2)*.06);
     sculpture.position.y=staticMode?0:Math.sin(t*.55)*.025;
     renderer.render(scene,camera);container.classList.add('sculpture-ready','webgl-ready');
     if(visible&&!staticMode&&!document.hidden)raf=requestAnimationFrame(draw);
   }
   function requestDraw(){if(!raf)raf=requestAnimationFrame(draw);}
   const resizer=new ResizeObserver(()=>{const r=container.getBoundingClientRect();renderer.setSize(r.width,r.height,false);camera.aspect=r.width/Math.max(1,r.height);camera.updateProjectionMatrix();requestDraw();});resizer.observe(container);
-  const observer=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;if(visible)requestDraw();else{cancelAnimationFrame(raf);raf=0;}});observer.observe(hero);
+  const observer=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;if(visible)requestDraw();else{cancelAnimationFrame(raf);raf=0;}});observer.observe(container);
   hero.addEventListener('pointermove',e=>{if(reducedMotion.matches||e.pointerType!=='mouse')return;pointerX=e.clientX/innerWidth-.5;pointerY=e.clientY/innerHeight-.5;},{passive:true});
   reducedMotion.addEventListener('change',()=>{cancelAnimationFrame(raf);raf=0;requestDraw();});
   document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnimationFrame(raf);raf=0;}else requestDraw();});

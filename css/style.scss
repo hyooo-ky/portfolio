@@ -69,3 +69,24 @@ body.theme-graphic{--paper:#f5f0d5;--ink:#161616;--accent:#3331ff;--line:#c7c2a9
 
 .theme-editorial .hero-art { right: 1vw; }
 @media(max-width:600px){.theme-editorial .hero-art{right:0;}}
+
+/* Persist as a quiet background layer through every section. */
+.theme-editorial > .hero-art {
+    position: fixed;
+    top: 9vh; bottom: auto; right: 1vw;
+    width: 49vw; max-width: 850px;
+    z-index: 1;
+    opacity: var(--art-opacity,1);
+    transform: translate3d(calc(var(--art-x,0px) + var(--art-scroll-x,0px)),var(--art-y,0px),0) scale(var(--art-scale,1));
+    transition: opacity .55s;
+}
+.theme-editorial .hero { isolation: auto; }
+.theme-editorial .container, .theme-editorial .hero-content,
+.theme-editorial .footer, .theme-editorial .subtitle, .theme-editorial .scroll {
+    position: relative; z-index: 2;
+}
+.theme-editorial .subtitle { position: absolute; }
+.theme-editorial .scroll { position: absolute; }
+@media(max-width:600px){
+    .theme-editorial > .hero-art { top: 37vh; right: 0; width: 78vw; max-width: 430px; }
+}

@@ -2,6 +2,7 @@
 const media = matchMedia('(prefers-reduced-motion: reduce)');
 const header = document.querySelector('.header');
 const art = document.querySelector('.hero-art');
+if(art) document.body.append(art);
 const progress = document.createElement('div');
 progress.className = 'reading-progress';
 progress.setAttribute('aria-hidden','true');
@@ -16,9 +17,14 @@ function render() {
   let current = sections[0]?.id;
   for (const s of sections) if (s.getBoundingClientRect().top < innerHeight * .4) current = s.id;
   nav.forEach(a => { if(a.hash === '#' + current) a.setAttribute('aria-current','location'); else a.removeAttribute('aria-current'); });
-  if(art && !media.matches) {
-    art.style.setProperty('--art-y',Math.min(scrollY*.65,560)+'px');
-    art.style.setProperty('--art-scale',String(1-Math.min(scrollY/Math.max(1,innerHeight),1)*.05));
+  if(art) {
+    const phase = scrollY / Math.max(1,document.documentElement.scrollHeight-innerHeight);
+    art.style.setProperty('--art-opacity',current==='hero'?'1':current==='about'?'.18':'.14');
+    if(!media.matches) {
+      art.style.setProperty('--art-y',String(Math.sin(phase*Math.PI*1.6)*innerHeight*.055)+'px');
+      art.style.setProperty('--art-scroll-x',String(-Math.sin(phase*Math.PI)*(innerWidth<600?28:100))+'px');
+      art.style.setProperty('--art-scale',current==='hero'?'1':String(.85+Math.sin(phase*Math.PI)*.08));
+    }
   }
 }
 function schedule(){ if(!frame) frame=requestAnimationFrame(render); }
@@ -81,4 +87,4 @@ if(art){
 }
 
 
-if(art) import('./sculpture.js?v=grid4').then(module=>module.mountSculpture(art,media)).catch(()=>{});
+if(art) import('./sculpture.js?v=background5').then(module=>module.mountSculpture(art,media)).catch(()=>{});
