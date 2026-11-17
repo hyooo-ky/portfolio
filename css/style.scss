@@ -130,3 +130,5 @@ body.theme-graphic{--paper:#f5f0d5;--ink:#161616;--accent:#3331ff;--line:#c7c2a9
     .theme-editorial .work-link:hover .work-overlay,
     .theme-editorial .work-link:focus-visible .work-overlay { opacity: 1; }
 }
+
+.theme-editorial .scroll { z-index: 1; }

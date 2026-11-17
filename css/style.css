@@ -1436,3 +1436,6 @@ body.theme-graphic {
     opacity: 1;
   }
 }
+.theme-editorial .scroll {
+  z-index: 1;
+}
