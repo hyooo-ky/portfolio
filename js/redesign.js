@@ -19,12 +19,14 @@ function render() {
   nav.forEach(a => { if(a.hash === '#' + current) a.setAttribute('aria-current','location'); else a.removeAttribute('aria-current'); });
   if(art) {
     const phase = scrollY / Math.max(1,document.documentElement.scrollHeight-innerHeight);
-    const constructionVisible=scrollY<sections[0].offsetHeight*.82+parseFloat(getComputedStyle(document.querySelector('#works')).paddingTop)*.55;
-    art.style.setProperty('--art-opacity',constructionVisible?'1':current==='about'?'.18':'.14');
+    const fadeStart=sections[0].offsetHeight*.82+parseFloat(getComputedStyle(document.querySelector('#works')).paddingTop)*.55;
+    const fadePosition=Math.min(1,Math.max(0,(scrollY-fadeStart)/Math.max(240,innerHeight*.45)));
+    const fade=fadePosition*fadePosition*(3-2*fadePosition);
+    art.style.setProperty('--art-opacity',String(1-.86*fade));
     if(!media.matches) {
       art.style.setProperty('--art-y',String(Math.sin(phase*Math.PI*1.6)*innerHeight*.055)+'px');
       art.style.setProperty('--art-scroll-x',String(-Math.sin(phase*Math.PI)*(innerWidth<600?28:100))+'px');
-      art.style.setProperty('--art-scale',constructionVisible?'1':String(.85+Math.sin(phase*Math.PI)*.08));
+      art.style.setProperty('--art-scale',String(1+((.85+Math.sin(phase*Math.PI)*.08)-1)*fade));
     }
   }
 }

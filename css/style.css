@@ -1315,7 +1315,7 @@ body.theme-graphic {
   z-index: 1;
   opacity: var(--art-opacity, 1);
   transform: translate3d(calc(var(--art-x, 0px) + var(--art-scroll-x, 0px)), var(--art-y, 0px), 0) scale(var(--art-scale, 1));
-  transition: opacity 0.55s;
+  transition: none;
 }
 
 .theme-editorial .hero {

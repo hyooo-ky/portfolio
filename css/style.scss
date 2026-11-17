@@ -78,7 +78,7 @@ body.theme-graphic{--paper:#f5f0d5;--ink:#161616;--accent:#3331ff;--line:#c7c2a9
     z-index: 1;
     opacity: var(--art-opacity,1);
     transform: translate3d(calc(var(--art-x,0px) + var(--art-scroll-x,0px)),var(--art-y,0px),0) scale(var(--art-scale,1));
-    transition: opacity .55s;
+    transition: none;
 }
 .theme-editorial .hero { isolation: auto; }
 .theme-editorial .container, .theme-editorial .hero-content,
