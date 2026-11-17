@@ -45,11 +45,11 @@ body.theme-graphic{--paper:#f5f0d5;--ink:#161616;--accent:#3331ff;--line:#c7c2a9
 .theme-editorial .contact-link { gap: clamp(20px,3vw,46px); }
 .theme-editorial .contact .arrow {
     width: clamp(42px,6vw,88px); height: 1px;
-    align-self: center; transform: none; position: relative;
+    align-self: baseline; transform: none; position: relative; top: .12em;
 }
 .theme-editorial .contact .arrow::after {
     position: absolute; right: 0; top: 50%; bottom: auto;
-    width: 12px; height: 1px;
+    width: 7px; height: 1px;
     border: 0; background: currentColor;
     transform: translateY(-50%) rotate(45deg); transform-origin: right center;
 }
