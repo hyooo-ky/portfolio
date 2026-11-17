@@ -94,3 +94,5 @@ body.theme-graphic{--paper:#f5f0d5;--ink:#161616;--accent:#3331ff;--line:#c7c2a9
 /* A little breathing room for the construction sequence before Works. */
 .theme-editorial .works { padding-top: clamp(240px,28vh,340px); }
 @media(max-width:600px){.theme-editorial .works{padding-top:230px;}}
+
+.theme-editorial .work-category { margin-bottom: -3px; }

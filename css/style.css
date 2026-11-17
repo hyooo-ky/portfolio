@@ -1354,3 +1354,6 @@ body.theme-graphic {
     padding-top: 230px;
   }
 }
+.theme-editorial .work-category {
+  margin-bottom: -3px;
+}
