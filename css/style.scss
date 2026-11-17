@@ -185,7 +185,7 @@ html[data-motion="off"]{
 }
 .motion-toggle[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: white; }
 .motion-toggle-star {
-    display: block; width: 20px; height: 20px; background: currentColor;
+    display: block; width: 18px; height: 18px; background: currentColor;
     -webkit-mask: url('../img/star-eight.svg') center / contain no-repeat;
     mask: url('../img/star-eight.svg') center / contain no-repeat;
     transform: rotate(var(--star-angle,0deg));
@@ -207,7 +207,7 @@ html[data-motion="off"] .background-object { transform: none !important; }
     .nav ul { gap: 10px; }
     .nav a { font-size: 9px; }
     .motion-toggle { margin-left: 0; width: 70px; height: 32px; padding: 0 8px; }
-    .motion-toggle-star { width: 18px; height: 18px; }
+    .motion-toggle-star { width: 16px; height: 16px; }
     .motion-toggle-track { width: 26px; }
     .motion-toggle[aria-pressed="true"] .motion-toggle-thumb { transform: translateX(10px); }
 }

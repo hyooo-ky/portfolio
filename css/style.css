@@ -1495,8 +1495,8 @@ html[data-motion=off] .theme-editorial .hero-profile .type-char {
 
 .motion-toggle-star {
   display: block;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   background: currentColor;
   -webkit-mask: url("../img/star-eight.svg") center/contain no-repeat;
   mask: url("../img/star-eight.svg") center/contain no-repeat;
@@ -1573,8 +1573,8 @@ html[data-motion=off] .background-object {
     padding: 0 8px;
   }
   .motion-toggle-star {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
   }
   .motion-toggle-track {
     width: 26px;
