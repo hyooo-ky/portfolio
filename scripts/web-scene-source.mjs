@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
-export function mountWebScene(container, reducedMotion) {
+export async function mountWebScene(container, reducedMotion) {
   let renderer;
   try { renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: 'low-power' }); }
   catch { return; }
@@ -15,7 +15,8 @@ export function mountWebScene(container, reducedMotion) {
   camera.position.z = 8.3;
   const pmrem = new THREE.PMREMGenerator(renderer);
   const room = new RoomEnvironment();
-  const environment = pmrem.fromScene(room, .04);
+  // A 64px reflection cubemap is enough for these small, rough metallic panels.
+  const environment = pmrem.fromScene(room, .04, .1, 100, { size: 64 });
   scene.environment = environment.texture;
   room.dispose(); pmrem.dispose();
   const webScene = new THREE.Group(); scene.add(webScene);
@@ -120,6 +121,9 @@ export function mountWebScene(container, reducedMotion) {
     if(visible&&!staticMode&&!document.hidden)raf=requestAnimationFrame(draw);
   }
   function requestDraw(){if(!raf)raf=requestAnimationFrame(draw);}
+  // Prepare every material before drawing; avoid blocking the first frame or scroll.
+  await renderer.compileAsync(scene,camera);
+  last=performance.now();start=last;
   const resizer=new ResizeObserver(()=>{constructionEnd=hero.offsetHeight*.52;const r=container.getBoundingClientRect();renderer.setSize(r.width,r.height,false);camera.aspect=r.width/Math.max(1,r.height);camera.updateProjectionMatrix();requestDraw();});resizer.observe(container);
   const observer=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;if(visible)requestDraw();else{cancelAnimationFrame(raf);raf=0;}});observer.observe(container);
   hero.addEventListener('pointermove',e=>{if(reducedMotion.matches||e.pointerType!=='mouse')return;pointerX=e.clientX/innerWidth-.5;pointerY=e.clientY/innerHeight-.5;},{passive:true});

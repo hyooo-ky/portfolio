@@ -95,4 +95,4 @@ if(art){
 }
 
 
-if(art) import('./web-scene.js?v=names19').then(module=>module.mountWebScene(art,media)).catch(()=>{});
+if(art) import('./web-scene.js?v=perf21').then(module=>module.mountWebScene(art,media)).catch(()=>{});
