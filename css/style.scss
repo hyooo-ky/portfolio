@@ -223,3 +223,20 @@ html[data-motion="off"] .motion-toggle-thumb { transition: transform .4s cubic-b
     opacity: 0; transition: opacity .4s;
 }
 .header-inner { position: relative; }
+
+@media(hover:hover) and (pointer:fine){
+    .motion-toggle {
+        gap: 0;
+        transition: gap .35s, background .4s, border-color .4s, color .4s;
+    }
+    .motion-toggle-star { flex-shrink: 0; }
+    .motion-toggle-track {
+        width: 0; padding-inline: 0; opacity: 0; overflow: hidden;
+        transition: width .35s, padding .35s, opacity .25s, background .4s;
+    }
+    .motion-toggle:hover, .motion-toggle:focus-visible { gap: 6px; }
+    .motion-toggle:hover .motion-toggle-track,
+    .motion-toggle:focus-visible .motion-toggle-track { width: 28px; padding-inline: 3px; opacity: 1; }
+    html[data-motion="off"] .motion-toggle { transition: gap .35s, background .4s, border-color .4s, color .4s !important; }
+    html[data-motion="off"] .motion-toggle-track { transition: width .35s, padding .35s, opacity .25s, background .4s !important; }
+}
