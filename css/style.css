@@ -1294,3 +1294,13 @@ body.theme-graphic {
 .theme-editorial .hero-art.webgl-ready > img {
   visibility: hidden;
 }
+
+.theme-editorial .hero-art {
+  right: 1vw;
+}
+
+@media (max-width: 600px) {
+  .theme-editorial .hero-art {
+    right: 0;
+  }
+}

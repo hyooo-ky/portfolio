@@ -17,8 +17,8 @@ function render() {
   for (const s of sections) if (s.getBoundingClientRect().top < innerHeight * .4) current = s.id;
   nav.forEach(a => { if(a.hash === '#' + current) a.setAttribute('aria-current','location'); else a.removeAttribute('aria-current'); });
   if(art && !media.matches) {
-    art.style.setProperty('--art-y',Math.min(scrollY*.26,180)+'px');
-    art.style.setProperty('--art-scale',String(1-Math.min(scrollY/innerHeight,1)*.14));
+    art.style.setProperty('--art-y',Math.min(scrollY*.65,560)+'px');
+    art.style.setProperty('--art-scale',String(1-Math.min(scrollY/Math.max(1,innerHeight),1)*.05));
   }
 }
 function schedule(){ if(!frame) frame=requestAnimationFrame(render); }
@@ -80,6 +80,5 @@ if(art){
   document.querySelector('#hero').addEventListener('pointerleave',()=>art.style.setProperty('--art-x','0px'));
 }
 
-if(art) import('./sculpture.js').then(module=>module.mountSculpture(art,media)).catch(()=>{});
 
-if(art) import('./sculpture.js').then(module=>module.mountSculpture(art,media)).catch(()=>{});
+if(art) import('./sculpture.js?v=grid4').then(module=>module.mountSculpture(art,media)).catch(()=>{});
