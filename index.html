@@ -26,7 +26,7 @@
 	<!-- Google Fonts -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Noto+Sans+JP:wght@300;400;500&family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800&family=Noto+Sans+JP:wght@300;400;500&family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="./css/style.min.css">
 	<link rel="stylesheet" href="./js/vendor/lenis.css">
 	<script type="application/ld+json">
@@ -43,7 +43,7 @@
 	</script>
 </head>
 
-<body>
+<body class="theme-editorial">
 	<div id="cursor-follower">
 	</div>
 	<header class="header">
@@ -65,8 +65,9 @@
 		</div>
 	</header>
 	<main>
-		<p class="subtitle">PORT<br>FOLIO</p>
 		<section id="hero" class="hero">
+		<p class="subtitle">PORT<br>FOLIO</p>
+<div class="hero-art" aria-hidden="true"><img src="img/sculpture-editorial.svg" alt="" width="800" height="800"></div>
 			<div class="hero-content">
 				<h1 class="hero-title">
 					<span class="reveal-text">Designing</span><br>
@@ -314,9 +315,10 @@
             <img class="work-preview-image" alt="">
         </div>
     </dialog>
-	<script type="module" src="./js/main.js"></script>
+	
 	<script type="module" src="./js/smooth-scroll.js"></script>
-	<script type="module" src="./js/refined-motion.js"></script>
+<script type="module" src="./js/redesign.js"></script>
+	
 </body>
 
 </html>
