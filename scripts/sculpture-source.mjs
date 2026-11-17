@@ -33,8 +33,8 @@ export function mountSculpture(container, reducedMotion) {
     s.lineTo(x,y+radius);s.quadraticCurveTo(x,y,x+radius,y);return s;
   }
   function panel(w,h,x,y,z,mat,depth=.055) {
-    const geometry=new THREE.ExtrudeGeometry(rounded(w,h,Math.min(.08,h/4)),{depth,bevelEnabled:true,bevelSegments:2,steps:1,bevelSize:.018,bevelThickness:.018,curveSegments:8});
-    const mesh=new THREE.Mesh(geometry,mat);mesh.position.set(x,y,z);sculpture.add(mesh);layers.push({mesh,z});return mesh;
+    const geometry=new THREE.ExtrudeGeometry(rounded(w,h,w>4?.24:Math.min(.08,h/4)),{depth,bevelEnabled:true,bevelSegments:2,steps:1,bevelSize:.018,bevelThickness:.018,curveSegments:8});
+    const mesh=new THREE.Mesh(geometry,mat.clone());mesh.position.set(x,y,z);sculpture.add(mesh);layers.push({mesh,w,h,x,y,z});return mesh;
   }
   panel(4.4,3.25,0,0,0,metal,.14);
   panel(4.12,2.95,0,-.02,.16,porcelain,.035);
@@ -68,15 +68,32 @@ export function mountSculpture(container, reducedMotion) {
   for(const {mesh,z} of layers.slice(0,5)){
     const edge=new THREE.LineSegments(new THREE.EdgesGeometry(mesh.geometry,25),wireMaterial);edge.position.copy(mesh.position);wire.add(edge);
   }
+  // The same UI panels reflow from desktop columns into a mobile stack.
+  const mobileLayout = [
+    [2.15,4.1,0,0],[1.98,3.9,0,0],[1.72,.88,0,.70],
+    [1.72,.70,0,-.26],[1.72,.70,0,-1.18],[.30,.06,-.68,1.45],
+    [.12,.025,.43,1.45],[.12,.025,.59,1.45],[.12,.025,.75,1.45],
+    [.65,.12,.36,.70],[1.5,.024,0,-.70],[.8,.024,-.34,-.84],
+    [1.5,.024,0,-1.62],[.8,.024,-.34,-1.77],
+  ];
+  const phoneInk = new THREE.MeshBasicMaterial({color:0x25272b,transparent:true,opacity:0});
+  const phoneDetail = new THREE.Group(); sculpture.add(phoneDetail);
+  for (const [w,h,y,z] of [[.48,.09,1.76,.23],[.53,.025,-1.94,.23]]) {
+    const geometry = new THREE.ExtrudeGeometry(rounded(w,h,h/2),{depth:.012,bevelEnabled:false,curveSegments:8});
+    const mesh = new THREE.Mesh(geometry,phoneInk);mesh.position.set(0,y,z);phoneDetail.add(mesh);
+  }
   renderer.domElement.setAttribute('aria-hidden','true');container.append(renderer.domElement);
   const hero=document.querySelector('#hero');
-  let raf=0,visible=true,last=performance.now(),start=last,progress=0,pointerX=0,pointerY=0;
+  let raf=0,visible=true,last=performance.now(),start=last,progress=0,mobile=0,pointerX=0,pointerY=0;
   const ease=(a,b,p)=>THREE.MathUtils.smoothstep(p,a,b);
   function draw(time){
     raf=0;const delta=Math.min(.1,(time-last)/1000);last=time;
     const staticMode=reducedMotion.matches;
     const target=staticMode?1:Math.min(1,Math.max(0,scrollY/Math.max(1,hero.offsetHeight*.46)));
     progress=staticMode?1:THREE.MathUtils.lerp(progress,target,1-Math.exp(-delta*8));
+    const page = staticMode ? 0 : scrollY / Math.max(1,document.documentElement.scrollHeight-innerHeight);
+    const mobileTarget = staticMode ? 0 : ease(.18,.42,page);
+    mobile = staticMode ? 0 : THREE.MathUtils.lerp(mobile,mobileTarget,1-Math.exp(-delta*6));
     const t=staticMode?0:(time-start)/1000;
     const fill=ease(.26,.84,progress);
     gridMaterial.opacity=(1-ease(.18,.73,progress))*.65;
@@ -85,10 +102,18 @@ export function mountSculpture(container, reducedMotion) {
     wireMaterial.opacity=ease(.04,.3,progress)*(1-ease(.69,.98,progress))*.8;
     wire.visible=progress>.03&&progress<.99;
     for(const mat of [metal,porcelain,blue,pale]){mat.opacity=fill;mat.depthWrite=fill>.98;}
-    for(const {mesh,z} of layers){mesh.visible=fill>.005;mesh.position.z=z+(1-fill)*(.25+z*2);}
-    dots.forEach(dot=>dot.visible=fill>.005);
-    const page = staticMode ? 0 : scrollY / Math.max(1,document.documentElement.scrollHeight-innerHeight);
-    sculpture.rotation.set(-1.02+ease(0,.9,progress)*.47+(staticMode?0:pointerY*.08+Math.sin(page*Math.PI*2)*.10),-.22+(staticMode?0:pointerX*.14+Math.sin(page*Math.PI*2)*.32),-.13+progress*.08+Math.sin(page*Math.PI*2)*.06);
+    layers.forEach(({mesh,w,h,x,y,z},index)=>{
+      const [mw,mh,mx,my] = mobileLayout[index];
+      mesh.visible=fill>.005;
+      mesh.material.opacity=fill;
+      mesh.material.depthWrite=fill>.98;
+      mesh.scale.set(THREE.MathUtils.lerp(1,mw/w,mobile),THREE.MathUtils.lerp(1,mh/h,mobile),1);
+      mesh.position.set(THREE.MathUtils.lerp(x,mx,mobile),THREE.MathUtils.lerp(y,my,mobile),z+(1-fill)*(.25+z*2));
+    });
+    dots.forEach(dot=>{dot.visible=fill>.005&&mobile<.95;dot.material.opacity=fill*(1-mobile);});
+    phoneInk.opacity=fill*ease(.3,.85,mobile);
+    phoneDetail.visible=mobile>.01;
+    sculpture.rotation.set(-1.02+ease(0,.9,progress)*.47+mobile*.28+(staticMode?0:pointerY*.08+Math.sin(page*Math.PI*2)*.10),-.22+(staticMode?0:pointerX*.14+Math.sin(page*Math.PI*2)*.32),-.13+progress*.08+Math.sin(page*Math.PI*2)*.06);
     sculpture.position.y=staticMode?0:Math.sin(t*.55)*.025;
     renderer.render(scene,camera);container.classList.add('sculpture-ready','webgl-ready');
     if(visible&&!staticMode&&!document.hidden)raf=requestAnimationFrame(draw);
