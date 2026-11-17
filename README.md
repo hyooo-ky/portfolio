@@ -32,20 +32,20 @@ JSONの書式、必須項目、URL、画像ファイルに問題がある場合�
 - 実績: `data/works.json`
 - レイアウト・本文: `index.html`（`works:start` から `works:end` までは自動生成されるので編集しない）
 - スタイル: `css/style.scss`（変更時は別途SassでCSSを生成）
-- 動作・演出: `js/main.js`
+- 動作・演出: `js/site.js`
 
 `npm run build:works` は実績のHTMLのみ更新します。`npm run build` はそれに加えて公開用の `dist/` を生成します。`dist/` はGit管理しません。
 
 ## Cloudflareの確認用ブランチ
 
-`preview/json-works` を確認用ブランチとして使います。本番ブランチは `main` のままにします。
+`preview/redesign-editorial` を確認用ブランチとして使います。本番ブランチは `main` のままにします。
 
 `wrangler.jsonc` はビルド時に `npm run build` を実行し、`dist/` の静的ファイルを使用する設定です。
 
 Cloudflareの対象Worker `portfolio` の設定から、Build / Builds → Branch control を確認してください。
 
 - Production branch: `main`
-- Preview builds: 有効（対象ブランチを指定できる場合は `preview/json-works`）
+- Preview builds: 有効（対象ブランチを指定できる場合は `preview/redesign-editorial`）
 - Preview command: 新しいWorker Previews方式では `npx wrangler preview`。既存の方式では `npx wrangler versions upload` を使用します。現在の画面でどちらの方式かを確認し、プレビューで `wrangler deploy` を使わないでください。
 - Build command: `npm run build`。未設定でもWranglerのカスタムビルドが実行します。両方設定するとビルドが2回走りますが出力は同じです。
 - Root directory: リポジトリのルート
@@ -76,15 +76,15 @@ Lenis 1.3.27（MIT）を `js/vendor/` に同梱しています。PCのホイー�
 
 ## 確認用の動きの調整
 
-`js/refined-motion.js` に見出しのライン出現、実績カードの順次出現、現在セクションのナビ表示、ページ上端の細い進行ラインをまとめています。CSSのホバー演出はマウス操作時だけ適用します。動きを減らす設定が有効な場合は追加演出を無効にします。
+`js/site.js` に見出しのライン出現、実績カードの順次出現、現在セクションのナビ表示、ページ上端の細い進行ラインをまとめています。CSSのホバー演出はマウス操作時だけ適用します。動きを減らす設定が有効な場合は追加演出を無効にします。
 
-## Editorial 3D sculpture
+## Web画面の背景オブジェクト
 
-`js/sculpture.js` は Three.js 0.180.0（MIT）を同梱したビルド済みモジュールです。外部CDNへの接続なしでクローム調の立体を描画します。原稿は `scripts/sculpture-source.mjs` にあります。画面外では描画ループを停止し、動きを減らす設定では静止画として描画します。WebGL非対応環境は既存SVGを使います。
+`js/web-scene.js` は Three.js 0.180.0（MIT）を同梱したビルド済みモジュールです。外部CDNへの接続なしでグリッドからWeb画面、スマートフォンへ変形する背景オブジェクトを描画します。原稿は `scripts/web-scene-source.mjs` にあります。画面外では描画ループを停止し、動きを減らす設定では静止画として描画します。WebGL非対応環境は既存SVGを使います。
 
-## オブジェクト案④
+## 背景オブジェクトの動作
 
-①のデザインで、グリッド→ワイヤーフレーム→Web画面の3段階をスクロールに連動させています。動きを減らす設定・WebGL非対応時には完成形を静止表示します。掲載内容は変更していません。
+グリッド→ワイヤーフレーム→Web画面の3段階をスクロールに連動させています。動きを減らす設定では完成形を静止表示し、WebGL非対応時にはグリッドのSVGを表示します。掲載内容は変更していません。
 
 オブジェクトはbody直下の固定背景として最下部まで表示します。本文・実績画像より背面に置き、FV以降は薄く表示します。
 

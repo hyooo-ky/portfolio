@@ -1,7 +1,7 @@
 
 const media = matchMedia('(prefers-reduced-motion: reduce)');
 const header = document.querySelector('.header');
-const art = document.querySelector('.hero-art');
+const art = document.querySelector('.background-object');
 if(art) {
   document.body.append(art);
   setTimeout(()=>art.classList.add('art-intro-ready'),media.matches?0:Math.max(0,850-performance.now()));
@@ -95,4 +95,4 @@ if(art){
 }
 
 
-if(art) import('./sculpture.js?v=spacing8').then(module=>module.mountSculpture(art,media)).catch(()=>{});
+if(art) import('./web-scene.js?v=names19').then(module=>module.mountWebScene(art,media)).catch(()=>{});

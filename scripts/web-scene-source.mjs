@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
-export function mountSculpture(container, reducedMotion) {
+export function mountWebScene(container, reducedMotion) {
   let renderer;
   try { renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: 'low-power' }); }
   catch { return; }
@@ -18,7 +18,7 @@ export function mountSculpture(container, reducedMotion) {
   const environment = pmrem.fromScene(room, .04);
   scene.environment = environment.texture;
   room.dispose(); pmrem.dispose();
-  const sculpture = new THREE.Group(); scene.add(sculpture);
+  const webScene = new THREE.Group(); scene.add(webScene);
   const metal = new THREE.MeshStandardMaterial({ color: 0xbfc6ce, metalness: .95, roughness: .22, transparent: true });
   const porcelain = new THREE.MeshStandardMaterial({ color: 0xf0f1f2, metalness: .28, roughness: .3, transparent: true });
   const blue = new THREE.MeshBasicMaterial({ color: 0x343bff, transparent: true, toneMapped: false });
@@ -34,7 +34,7 @@ export function mountSculpture(container, reducedMotion) {
   }
   function panel(w,h,x,y,z,mat,depth=.055) {
     const geometry=new THREE.ExtrudeGeometry(rounded(w,h,w>4?.24:Math.min(.08,h/4)),{depth,bevelEnabled:true,bevelSegments:2,steps:1,bevelSize:.018,bevelThickness:.018,curveSegments:8});
-    const mesh=new THREE.Mesh(geometry,mat.clone());mesh.position.set(x,y,z);sculpture.add(mesh);layers.push({mesh,w,h,x,y,z});return mesh;
+    const mesh=new THREE.Mesh(geometry,mat.clone());mesh.position.set(x,y,z);webScene.add(mesh);layers.push({mesh,w,h,x,y,z});return mesh;
   }
   panel(4.4,3.25,0,0,0,metal,.14);
   panel(4.12,2.95,0,-.02,.16,porcelain,.035);
@@ -51,9 +51,9 @@ export function mountSculpture(container, reducedMotion) {
   }
   const dots=[];
   for(let i=0;i<3;i++) {
-    const dot=new THREE.Mesh(new THREE.SphereGeometry(.035,12,8),metal);dot.position.set(-1.86+i*.13,1.45,.23);sculpture.add(dot);dots.push(dot);
+    const dot=new THREE.Mesh(new THREE.SphereGeometry(.035,12,8),metal);dot.position.set(-1.86+i*.13,1.45,.23);webScene.add(dot);dots.push(dot);
   }
-  const grid=new THREE.Group();sculpture.add(grid);
+  const grid=new THREE.Group();webScene.add(grid);
   const gridMaterial=new THREE.LineBasicMaterial({color:0x616a78,transparent:true,opacity:.65});
   const segments=[];
   for(let i=0;i<=6;i++){const x=-2.2+i*4.4/6;segments.push(x,-1.625,.01,x,1.625,.01);}
@@ -64,7 +64,7 @@ export function mountSculpture(container, reducedMotion) {
     const node=new THREE.Mesh(new THREE.SphereGeometry(.035,10,6),nodesMaterial);node.position.set(-2.2+i*4.4/6,-1.625+j*3.25/4,.02);grid.add(node);
   }
   const wireMaterial=new THREE.LineBasicMaterial({color:0x666e7c,transparent:true});
-  const wire=new THREE.Group();sculpture.add(wire);
+  const wire=new THREE.Group();webScene.add(wire);
   for(const {mesh,z} of layers.slice(0,5)){
     const edge=new THREE.LineSegments(new THREE.EdgesGeometry(mesh.geometry,25),wireMaterial);edge.position.copy(mesh.position);wire.add(edge);
   }
@@ -77,7 +77,7 @@ export function mountSculpture(container, reducedMotion) {
     [1.5,.024,0,-1.62],[.8,.024,-.34,-1.77],
   ];
   const phoneInk = new THREE.MeshBasicMaterial({color:0x25272b,transparent:true,opacity:0});
-  const phoneDetail = new THREE.Group(); sculpture.add(phoneDetail);
+  const phoneDetail = new THREE.Group(); webScene.add(phoneDetail);
   for (const [w,h,y,z] of [[.48,.09,1.76,.23],[.53,.025,-1.94,.23]]) {
     const geometry = new THREE.ExtrudeGeometry(rounded(w,h,h/2),{depth:.012,bevelEnabled:false,curveSegments:8});
     const mesh = new THREE.Mesh(geometry,phoneInk);mesh.position.set(0,y,z);phoneDetail.add(mesh);
@@ -114,9 +114,9 @@ export function mountSculpture(container, reducedMotion) {
     dots.forEach(dot=>{dot.visible=fill>.005&&mobile<.95;dot.material.opacity=fill*(1-mobile);});
     phoneInk.opacity=fill*ease(.3,.85,mobile);
     phoneDetail.visible=mobile>.01;
-    sculpture.rotation.set(-1.02+ease(0,.9,progress)*.47+mobile*.28+(staticMode?0:pointerY*.08+Math.sin(page*Math.PI*2)*.10),-.22+(staticMode?0:pointerX*.14+Math.sin(page*Math.PI*2)*.32),-.13+progress*.08+Math.sin(page*Math.PI*2)*.06);
-    sculpture.position.y=staticMode?0:Math.sin(t*.55)*.025;
-    renderer.render(scene,camera);container.classList.add('sculpture-ready','webgl-ready');
+    webScene.rotation.set(-1.02+ease(0,.9,progress)*.47+mobile*.28+(staticMode?0:pointerY*.08+Math.sin(page*Math.PI*2)*.10),-.22+(staticMode?0:pointerX*.14+Math.sin(page*Math.PI*2)*.32),-.13+progress*.08+Math.sin(page*Math.PI*2)*.06);
+    webScene.position.y=staticMode?0:Math.sin(t*.55)*.025;
+    renderer.render(scene,camera);container.classList.add('web-scene-ready','webgl-ready');
     if(visible&&!staticMode&&!document.hidden)raf=requestAnimationFrame(draw);
   }
   function requestDraw(){if(!raf)raf=requestAnimationFrame(draw);}
@@ -125,7 +125,7 @@ export function mountSculpture(container, reducedMotion) {
   hero.addEventListener('pointermove',e=>{if(reducedMotion.matches||e.pointerType!=='mouse')return;pointerX=e.clientX/innerWidth-.5;pointerY=e.clientY/innerHeight-.5;},{passive:true});
   reducedMotion.addEventListener('change',()=>{cancelAnimationFrame(raf);raf=0;requestDraw();});
   document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnimationFrame(raf);raf=0;}else requestDraw();});
-  renderer.domElement.addEventListener('webglcontextlost',e=>{e.preventDefault();cancelAnimationFrame(raf);raf=0;container.classList.remove('sculpture-ready','webgl-ready');});
+  renderer.domElement.addEventListener('webglcontextlost',e=>{e.preventDefault();cancelAnimationFrame(raf);raf=0;container.classList.remove('web-scene-ready','webgl-ready');});
   renderer.domElement.addEventListener('webglcontextrestored',requestDraw);
   addEventListener('pagehide',()=>{cancelAnimationFrame(raf);raf=0;});addEventListener('pageshow',requestDraw);
 }

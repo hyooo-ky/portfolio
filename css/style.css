@@ -235,7 +235,7 @@ section {
   border-radius: 50%;
 }
 
-.hero-art {
+.background-object {
   position: absolute;
   z-index: 1;
   right: -3vw;
@@ -247,16 +247,16 @@ section {
   transform: translate3d(var(--art-x, 0px), var(--art-y, 0px), 0);
 }
 
-.hero-art img {
+.background-object img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: contain;
-  animation: sculptureFloat 14s ease-in-out infinite;
+  animation: sceneFloat 14s ease-in-out infinite;
   filter: drop-shadow(0 30px 18px rgba(0, 0, 0, 0.0431372549));
 }
 
-.hero-art::after {
+.background-object::after {
   content: "";
   position: absolute;
   bottom: 8%;
@@ -364,14 +364,14 @@ section {
   background: var(--panel);
 }
 
-.work-image-placeholder {
+.work-image-frame {
   width: 100%;
   height: 100%;
   overflow: hidden;
   transition: transform 1.1s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.work-image-placeholder img {
+.work-image-frame img {
   display: block;
   width: 100%;
   height: 100%;
@@ -720,7 +720,7 @@ html.preview-open {
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .work-link:hover .work-image-placeholder, .work-link:focus-visible .work-image-placeholder {
+  .work-link:hover .work-image-frame, .work-link:focus-visible .work-image-frame {
     transform: scale(1.045);
   }
   .work-link:hover .work-overlay {
@@ -775,18 +775,18 @@ body.theme-graphic {
   transform-origin: left center;
 }
 
-.theme-graphic .hero-art {
+.theme-graphic .background-object {
   width: 47vw;
   right: -1vw;
   top: 9%;
 }
 
-.theme-graphic .hero-art img {
+.theme-graphic .background-object img {
   animation: graphicFloat 12s ease-in-out infinite;
   filter: none;
 }
 
-.theme-graphic .hero-art::after {
+.theme-graphic .background-object::after {
   display: none;
 }
 
@@ -885,7 +885,7 @@ body.theme-graphic {
   font-weight: 600;
 }
 
-@keyframes sculptureFloat {
+@keyframes sceneFloat {
   0%, 100% {
     transform: translateY(0) rotate(-7deg);
   }
@@ -928,7 +928,7 @@ body.theme-graphic {
   .hero-title, .theme-graphic .hero-title {
     font-size: 10vw;
   }
-  .hero-art, .theme-graphic .hero-art {
+  .background-object, .theme-graphic .background-object {
     top: 25%;
     width: 48vw;
   }
@@ -1001,14 +1001,14 @@ body.theme-graphic {
     left: 0;
     margin-top: 0;
   }
-  .hero-art, .theme-graphic .hero-art {
+  .background-object, .theme-graphic .background-object {
     top: auto;
     bottom: 66px;
     right: -2vw;
     width: 73vw;
     max-width: 420px;
   }
-  .hero-art img {
+  .background-object img {
     animation-duration: 16s;
   }
   .subtitle {
@@ -1135,7 +1135,7 @@ body.theme-graphic {
     border-width: 4px;
     box-shadow: 7px 7px 0 #161616;
   }
-  .theme-graphic .hero-art {
+  .theme-graphic .background-object {
     width: 76vw;
   }
 }
@@ -1151,7 +1151,7 @@ body.theme-graphic {
     opacity: 1;
     transform: none;
   }
-  .hero-art {
+  .background-object {
     transform: none !important;
   }
 }
@@ -1191,12 +1191,12 @@ body.theme-graphic {
     translate: 0 0;
   }
 }
-/* Editorial refinement: chrome sculpture, compact profile and precise arrow. */
-.theme-editorial .hero-art {
+/* Editorial refinement: responsive web scene, compact profile and precise arrow. */
+.theme-editorial .background-object {
   transform: translate3d(var(--art-x, 0px), var(--art-y, 0px), 0) scale(var(--art-scale, 1));
 }
 
-.theme-editorial .hero-art canvas {
+.theme-editorial .background-object canvas {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -1205,16 +1205,16 @@ body.theme-graphic {
   transition: opacity 0.5s;
 }
 
-.theme-editorial .hero-art.sculpture-ready canvas {
+.theme-editorial .background-object.web-scene-ready canvas {
   opacity: 1;
 }
 
-.theme-editorial .hero-art.sculpture-ready > img {
+.theme-editorial .background-object.web-scene-ready > img {
   opacity: 0;
   animation: none;
 }
 
-.theme-editorial .hero-art::after {
+.theme-editorial .background-object::after {
   opacity: 0.05;
 }
 
@@ -1281,32 +1281,32 @@ body.theme-graphic {
     font-size: 14px;
   }
 }
-.theme-editorial .hero-art {
+.theme-editorial .background-object {
   transform: translate3d(var(--art-x, 0px), var(--art-y, 0px), 0) scale(var(--art-scale, 1));
 }
 
-.theme-editorial .hero-art canvas {
+.theme-editorial .background-object canvas {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
 }
 
-.theme-editorial .hero-art.webgl-ready > img {
+.theme-editorial .background-object.webgl-ready > img {
   visibility: hidden;
 }
 
-.theme-editorial .hero-art {
+.theme-editorial .background-object {
   right: 1vw;
 }
 
 @media (max-width: 600px) {
-  .theme-editorial .hero-art {
+  .theme-editorial .background-object {
     right: 0;
   }
 }
 /* Persist as a quiet background layer through every section. */
-.theme-editorial > .hero-art {
+.theme-editorial > .background-object {
   position: fixed;
   top: 9vh;
   bottom: auto;
@@ -1338,7 +1338,7 @@ body.theme-graphic {
 }
 
 @media (max-width: 600px) {
-  .theme-editorial > .hero-art {
+  .theme-editorial > .background-object {
     top: 37vh;
     right: 0;
     width: 78vw;
@@ -1387,11 +1387,11 @@ body.theme-graphic {
   }
 }
 /* Hide both the fallback and canvas until the title entrance is complete. */
-.theme-editorial .hero-art {
+.theme-editorial .background-object {
   visibility: hidden;
 }
 
-.theme-editorial .hero-art.art-intro-ready {
+.theme-editorial .background-object.art-intro-ready {
   visibility: visible;
   animation: objectIntro 0.6s ease-out backwards;
 }
@@ -1417,7 +1417,7 @@ body.theme-graphic {
   isolation: isolate;
 }
 
-.theme-editorial .work-image-placeholder {
+.theme-editorial .work-image-frame {
   will-change: transform;
   backface-visibility: hidden;
 }

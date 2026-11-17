@@ -47,7 +47,7 @@ try {
     return `                    <article class="work-item">
                         <a ${link} target="_blank" rel="noopener noreferrer" class="work-link">
                             <div class="work-image-container">
-                                <div class="work-image-placeholder">
+                                <div class="work-image-frame">
                                     <img src="${img}" alt="${title}" loading="lazy">
                                 </div>
                                 <div class="work-overlay"><span class="view-more">View</span></div>
