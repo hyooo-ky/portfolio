@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>try{document.documentElement.dataset.motion=localStorage.getItem('portfolio-motion')==='off'?'off':'on'}catch{document.documentElement.dataset.motion='on'}</script>
 	<title>Katsuya Hyodo | Web Designer Portfolio</title>
 	<meta name="description" content="兵頭克弥のポートフォリオサイト。制作実績を掲載しています。">
 	<link rel="canonical" href="https://hyooo-ky.github.io/portfolio/">
@@ -21,13 +22,19 @@
 	<meta name="twitter:description" content="兵頭克弥のポートフォリオサイト">
 	<meta name="twitter:image" content="https://hyooo-ky.github.io/portfolio/img/ogp.png">
 	<!-- favicon -->
-	<link rel="icon" href="https://hyooo-ky.github.io/portfolio/img/favicon.ico">
-	<link rel="apple-touch-icon" href="https://hyooo-ky.github.io/portfolio/img/apple-touch-icon.jpg">
-	<!-- Google Fonts -->
+	<link rel="icon" href="./img/favicon.ico?v=icons27" sizes="16x16 32x32 48x48 64x64 128x128 256x256">
+	<link rel="icon" href="./img/star-eight.svg?v=icons27" type="image/svg+xml" sizes="any">
+	<link rel="apple-touch-icon" href="./img/apple-touch-icon.png?v=icons27" sizes="180x180">
+	<!-- Latin fonts are served locally; Japanese glyphs are selected at build time. -->
+	<link rel="preload" href="./fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="./fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Noto+Sans+JP:wght@300;400;500&family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="./css/style.min.css">
+	<!-- japanese-font:start -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300..500&amp;display=swap&amp;text=%C2%A9%E2%80%94%E3%80%81%E3%80%82%E3%81%82%E3%81%84%E3%81%88%E3%81%8B%E3%81%8C%E3%81%8D%E3%81%8F%E3%81%93%E3%81%97%E3%81%99%E3%81%9D%E3%81%9F%E3%81%A3%E3%81%A4%E3%81%A6%E3%81%A7%E3%81%A8%E3%81%AA%E3%81%AB%E3%81%AE%E3%81%AF%E3%81%B3%E3%81%BE%E3%81%BF%E3%82%81%E3%82%82%E3%82%84%E3%82%89%E3%82%8A%E3%82%8B%E3%82%8C%E3%82%8F%E3%82%92%E3%82%A2%E3%82%A3%E3%82%A4%E3%82%AF%E3%82%B0%E3%82%B3%E3%82%B5%E3%82%B6%E3%82%B7%E3%83%87%E3%83%88%E3%83%8A%E3%83%92%E3%83%A7%E3%83%AA%E3%83%AC%E3%83%B3%E3%83%BB%E3%83%BC%E4%B8%80%E4%B8%8D%E4%B8%A1%E4%B8%BB%E4%BA%8B%E4%BB%A5%E4%BB%B6%E4%BC%9A%E4%BD%9C%E5%83%8D%E5%85%8B%E5%85%A5%E5%85%AC%E5%85%B5%E5%87%BA%E5%88%86%E5%88%B6%E5%89%8D%E5%8B%95%E5%8D%92%E5%91%B3%E5%9C%B0%E5%9F%9F%E5%A4%A7%E5%AA%9B%E5%AD%A6%E5%AE%9F%E5%AE%A2%E5%B1%B1%E5%B2%A1%E5%B9%B4%E5%BC%A5%E5%BC%B7%E5%BD%93%E5%BE%8C%E5%BE%93%E5%BF%83%E6%80%A7%E6%84%8F%E6%84%9B%E6%88%90%E6%88%A6%E6%8B%85%E6%8B%93%E6%8C%91%E6%8D%AE%E6%90%BA%E6%95%B4%E6%96%B0%E6%96%B9%E6%A0%A1%E6%A5%AD%E6%A7%8B%E6%A9%9F%E6%B1%BA%E6%B4%BB%E7%90%86%E7%94%A3%E7%94%A8%E7%9B%B4%E7%9C%8C%E7%A4%BE%E7%A9%8D%E7%AE%A1%E7%AF%89%E7%B4%84%E7%B5%8C%E7%B5%A1%E7%B7%B4%E8%80%83%E8%81%B7%E8%87%AA%E8%88%88%E8%A1%8C%E8%A3%85%E8%A6%81%E8%A6%8B%E8%A6%8F%E8%A8%88%E8%A8%93%E8%A8%AD%E8%B2%AB%E8%BA%AB%E9%80%80%E9%80%A3%E9%80%B2%E9%81%8B%E9%81%A9%E9%87%8E%E9%95%B7%E9%96%8B%E9%96%93%E9%96%A2%E9%A0%AD%E9%A1%A7%E9%A8%93%EF%BC%9A" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300..500&amp;display=swap&amp;text=%C2%A9%E2%80%94%E3%80%81%E3%80%82%E3%81%82%E3%81%84%E3%81%88%E3%81%8B%E3%81%8C%E3%81%8D%E3%81%8F%E3%81%93%E3%81%97%E3%81%99%E3%81%9D%E3%81%9F%E3%81%A3%E3%81%A4%E3%81%A6%E3%81%A7%E3%81%A8%E3%81%AA%E3%81%AB%E3%81%AE%E3%81%AF%E3%81%B3%E3%81%BE%E3%81%BF%E3%82%81%E3%82%82%E3%82%84%E3%82%89%E3%82%8A%E3%82%8B%E3%82%8C%E3%82%8F%E3%82%92%E3%82%A2%E3%82%A3%E3%82%A4%E3%82%AF%E3%82%B0%E3%82%B3%E3%82%B5%E3%82%B6%E3%82%B7%E3%83%87%E3%83%88%E3%83%8A%E3%83%92%E3%83%A7%E3%83%AA%E3%83%AC%E3%83%B3%E3%83%BB%E3%83%BC%E4%B8%80%E4%B8%8D%E4%B8%A1%E4%B8%BB%E4%BA%8B%E4%BB%A5%E4%BB%B6%E4%BC%9A%E4%BD%9C%E5%83%8D%E5%85%8B%E5%85%A5%E5%85%AC%E5%85%B5%E5%87%BA%E5%88%86%E5%88%B6%E5%89%8D%E5%8B%95%E5%8D%92%E5%91%B3%E5%9C%B0%E5%9F%9F%E5%A4%A7%E5%AA%9B%E5%AD%A6%E5%AE%9F%E5%AE%A2%E5%B1%B1%E5%B2%A1%E5%B9%B4%E5%BC%A5%E5%BC%B7%E5%BD%93%E5%BE%8C%E5%BE%93%E5%BF%83%E6%80%A7%E6%84%8F%E6%84%9B%E6%88%90%E6%88%A6%E6%8B%85%E6%8B%93%E6%8C%91%E6%8D%AE%E6%90%BA%E6%95%B4%E6%96%B0%E6%96%B9%E6%A0%A1%E6%A5%AD%E6%A7%8B%E6%A9%9F%E6%B1%BA%E6%B4%BB%E7%90%86%E7%94%A3%E7%94%A8%E7%9B%B4%E7%9C%8C%E7%A4%BE%E7%A9%8D%E7%AE%A1%E7%AF%89%E7%B4%84%E7%B5%8C%E7%B5%A1%E7%B7%B4%E8%80%83%E8%81%B7%E8%87%AA%E8%88%88%E8%A1%8C%E8%A3%85%E8%A6%81%E8%A6%8B%E8%A6%8F%E8%A8%88%E8%A8%93%E8%A8%AD%E8%B2%AB%E8%BA%AB%E9%80%80%E9%80%A3%E9%80%B2%E9%81%8B%E9%81%A9%E9%87%8E%E9%95%B7%E9%96%8B%E9%96%93%E9%96%A2%E9%A0%AD%E9%A1%A7%E9%A8%93%EF%BC%9A"></noscript>
+    <!-- japanese-font:end -->
+	<link rel="stylesheet" href="./css/style.min.css?v=touch33">
 	<link rel="stylesheet" href="./js/vendor/lenis.css">
 	<script type="application/ld+json">
 	{
@@ -43,7 +50,7 @@
 	</script>
 </head>
 
-<body>
+<body class="theme-editorial">
 	<div id="cursor-follower">
 	</div>
 	<header class="header">
@@ -62,18 +69,21 @@
 					</li>
 				</ul>
 			</nav>
+
 		</div>
 	</header>
+    <button type="button" class="motion-toggle" aria-label="アニメーション" aria-pressed="true" hidden><span class="motion-toggle-star" aria-hidden="true"></span><span class="motion-toggle-track" aria-hidden="true"><span class="motion-toggle-thumb"></span></span></button>
 	<main>
-		<p class="subtitle">PORT<br>FOLIO</p>
 		<section id="hero" class="hero">
+		<p class="subtitle">PORT<br>FOLIO</p>
+<div class="background-object" aria-hidden="true"><img src="img/web-scene-fallback.svg?v=names19" alt="" width="800" height="800"></div>
 			<div class="hero-content">
 				<h1 class="hero-title">
 					<span class="reveal-text">Designing</span><br>
 					<span class="reveal-text">Digital</span><br>
 					<span class="reveal-text">Experience.</span>
 				</h1>
-				<p class="hero-profile"><span>KATSUYA HYODO</span> — Web Designer</p>
+				<p class="hero-profile"><span class="visually-hidden">KATSUYA HYODO — Web Designer</span><span class="profile-name"><span class="type-char" style="--char:0" aria-hidden="true">K</span><span class="type-char" style="--char:1" aria-hidden="true">A</span><span class="type-char" style="--char:2" aria-hidden="true">T</span><span class="type-char" style="--char:3" aria-hidden="true">S</span><span class="type-char" style="--char:4" aria-hidden="true">U</span><span class="type-char" style="--char:5" aria-hidden="true">Y</span><span class="type-char" style="--char:6" aria-hidden="true">A</span><span class="type-char" style="--char:7" aria-hidden="true"> </span><span class="type-char" style="--char:8" aria-hidden="true">H</span><span class="type-char" style="--char:9" aria-hidden="true">Y</span><span class="type-char" style="--char:10" aria-hidden="true">O</span><span class="type-char" style="--char:11" aria-hidden="true">D</span><span class="type-char" style="--char:12" aria-hidden="true">O</span></span><span class="type-char" style="--char:12" aria-hidden="true"> </span><span class="type-char" style="--char:13" aria-hidden="true">—</span><span class="type-char" style="--char:14" aria-hidden="true"> </span><span class="type-char" style="--char:15" aria-hidden="true">W</span><span class="type-char" style="--char:16" aria-hidden="true">e</span><span class="type-char" style="--char:17" aria-hidden="true">b</span><span class="type-char" style="--char:18" aria-hidden="true"> </span><span class="type-char" style="--char:19" aria-hidden="true">D</span><span class="type-char" style="--char:20" aria-hidden="true">e</span><span class="type-char" style="--char:21" aria-hidden="true">s</span><span class="type-char" style="--char:22" aria-hidden="true">i</span><span class="type-char" style="--char:23" aria-hidden="true">g</span><span class="type-char" style="--char:24" aria-hidden="true">n</span><span class="type-char" style="--char:25" aria-hidden="true">e</span><span class="type-char" style="--char:26" aria-hidden="true">r</span></p>
 			</div>
 			<div class="scroll">
 				<div class="scroll-indicator">
@@ -90,7 +100,7 @@
                     <article class="work-item">
                         <a href="https://www.shigatsusya.jp/" target="_blank" rel="noopener noreferrer" class="work-link">
                             <div class="work-image-container">
-                                <div class="work-image-placeholder">
+                                <div class="work-image-frame">
                                     <img src="img/work-01.webp" alt="SHIGATSUSHA" loading="lazy">
                                 </div>
                                 <div class="work-overlay"><span class="view-more">View</span></div>
@@ -105,7 +115,7 @@
                     <article class="work-item">
                         <a href="https://www.smbc-cf-recruit.jp/" target="_blank" rel="noopener noreferrer" class="work-link">
                             <div class="work-image-container">
-                                <div class="work-image-placeholder">
+                                <div class="work-image-frame">
                                     <img src="img/work-02.webp" alt="SMBC CONSUMER FINANCE" loading="lazy">
                                 </div>
                                 <div class="work-overlay"><span class="view-more">View</span></div>
@@ -120,7 +130,7 @@
                     <article class="work-item">
                         <a href="https://www.miyakohotels-recruiting.com/newgraduate.html" target="_blank" rel="noopener noreferrer" class="work-link">
                             <div class="work-image-container">
-                                <div class="work-image-placeholder">
+                                <div class="work-image-frame">
                                     <img src="img/work-03.webp" alt="KINTETSU MIYAKO HOTELS" loading="lazy">
                                 </div>
                                 <div class="work-overlay"><span class="view-more">View</span></div>
@@ -135,7 +145,7 @@
                     <article class="work-item">
                         <a href="https://www.access-t.co.jp/pg/" target="_blank" rel="noopener noreferrer" class="work-link">
                             <div class="work-image-container">
-                                <div class="work-image-placeholder">
+                                <div class="work-image-frame">
                                     <img src="img/work-04.webp" alt="ACCESS PROGRESS" loading="lazy">
                                 </div>
                                 <div class="work-overlay"><span class="view-more">View</span></div>
@@ -150,7 +160,7 @@
                     <article class="work-item">
                         <a href="https://www.suntorylogistics.co.jp/recruit/" target="_blank" rel="noopener noreferrer" class="work-link">
                             <div class="work-image-container">
-                                <div class="work-image-placeholder">
+                                <div class="work-image-frame">
                                     <img src="img/work-05.webp" alt="SUNTORY LOGISTICS" loading="lazy">
                                 </div>
                                 <div class="work-overlay"><span class="view-more">View</span></div>
@@ -165,7 +175,7 @@
                     <article class="work-item">
                         <a href="https://www.kineel.jp/" target="_blank" rel="noopener noreferrer" class="work-link">
                             <div class="work-image-container">
-                                <div class="work-image-placeholder">
+                                <div class="work-image-frame">
                                     <img src="img/work-06.webp" alt="KINEEL" loading="lazy">
                                 </div>
                                 <div class="work-overlay"><span class="view-more">View</span></div>
@@ -180,7 +190,7 @@
                     <article class="work-item">
                         <a href="https://sowaka.com/" target="_blank" rel="noopener noreferrer" class="work-link">
                             <div class="work-image-container">
-                                <div class="work-image-placeholder">
+                                <div class="work-image-frame">
                                     <img src="img/work-07.webp" alt="SOWAKA" loading="lazy">
                                 </div>
                                 <div class="work-overlay"><span class="view-more">View</span></div>
@@ -195,7 +205,7 @@
                     <article class="work-item">
                         <a href="https://yuikuen.com/" target="_blank" rel="noopener noreferrer" class="work-link">
                             <div class="work-image-container">
-                                <div class="work-image-placeholder">
+                                <div class="work-image-frame">
                                     <img src="img/work-08.webp" alt="YUIKUEN" loading="lazy">
                                 </div>
                                 <div class="work-overlay"><span class="view-more">View</span></div>
@@ -210,7 +220,7 @@
                     <article class="work-item">
                         <a href="https://www.yanmar.com/jp/recruit/new_graduate/people/interview/" target="_blank" rel="noopener noreferrer" class="work-link">
                             <div class="work-image-container">
-                                <div class="work-image-placeholder">
+                                <div class="work-image-frame">
                                     <img src="img/work-09.webp" alt="YANMAR" loading="lazy">
                                 </div>
                                 <div class="work-overlay"><span class="view-more">View</span></div>
@@ -225,7 +235,7 @@
                     <article class="work-item">
                         <a href="img/chuden-cti-archive.webp" data-preview-image="img/chuden-cti-archive.webp" data-preview-title="CHUDEN CTI" aria-haspopup="dialog" target="_blank" rel="noopener noreferrer" class="work-link">
                             <div class="work-image-container">
-                                <div class="work-image-placeholder">
+                                <div class="work-image-frame">
                                     <img src="img/work-10.webp" alt="CHUDEN CTI" loading="lazy">
                                 </div>
                                 <div class="work-overlay"><span class="view-more">View</span></div>
@@ -240,7 +250,7 @@
                     <article class="work-item">
                         <a href="https://www.akakabe.com/ippan-recruit/" target="_blank" rel="noopener noreferrer" class="work-link">
                             <div class="work-image-container">
-                                <div class="work-image-placeholder">
+                                <div class="work-image-frame">
                                     <img src="img/work-11.webp" alt="AKAKABE" loading="lazy">
                                 </div>
                                 <div class="work-overlay"><span class="view-more">View</span></div>
@@ -255,7 +265,7 @@
                     <article class="work-item">
                         <a href="https://www.likaman.co.jp/recruit/" target="_blank" rel="noopener noreferrer" class="work-link">
                             <div class="work-image-container">
-                                <div class="work-image-placeholder">
+                                <div class="work-image-frame">
                                     <img src="img/work-12.webp" alt="LIQUOR MOUNTAIN" loading="lazy">
                                 </div>
                                 <div class="work-overlay"><span class="view-more">View</span></div>
@@ -314,9 +324,10 @@
             <img class="work-preview-image" alt="">
         </div>
     </dialog>
-	<script type="module" src="./js/main.js"></script>
-	<script type="module" src="./js/smooth-scroll.js"></script>
-	<script type="module" src="./js/refined-motion.js"></script>
+
+	<script type="module" src="./js/smooth-scroll.js?v=touch33"></script>
+<script type="module" src="./js/site.js?v=touch33"></script>
+
 </body>
 
 </html>

@@ -1,6 +1,6 @@
 import Lenis from './vendor/lenis.mjs';
 
-const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+import { motion } from './motion.js?v=touch33';
 let lenis;
 
 function syncDialogState() {
@@ -16,6 +16,7 @@ function configure() {
   if (motion.matches) return;
   lenis = new Lenis({
     autoRaf: true,
+    respectReducedMotion: false,
     lerp: 0.16,
     smoothWheel: true,
     syncTouch: false,

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Motion switch sample</title>
+<style>
+:root{--paper:#f0efe9;--ink:#151515;--blue:#343bff;--line:#c9c9bf}
+*{box-sizing:border-box}body{margin:0;min-height:100svh;background:var(--paper);color:var(--ink);font-family:Arial,"Noto Sans JP",sans-serif;display:grid;place-items:center;padding:32px 20px}main{width:min(100%,620px)}h1{font-size:26px;letter-spacing:-.04em;font-weight:500;margin:0 0 14px}p{font-size:12px;color:#66675f;line-height:1.9;margin:0}.samples{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:48px 0 32px}.sample{display:grid;justify-items:center;gap:22px;padding:36px 12px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.state{font-size:10px;letter-spacing:.14em;color:#66675f}
+.motion-switch{width:84px;height:44px;display:inline-flex;align-items:center;justify-content:space-between;padding:0 11px;border:1px solid var(--line);border-radius:30px;background:var(--paper);color:var(--blue);cursor:pointer;transition:background .4s,border-color .4s,color .4s;-webkit-tap-highlight-color:transparent}.motion-switch:focus-visible{outline:2px solid var(--blue);outline-offset:5px}.motion-switch[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:#fff}.star{display:block;width:20px;height:20px;background:currentColor;-webkit-mask:url('../star-eight.svg') center/contain no-repeat;mask:url('../star-eight.svg') center/contain no-repeat;transform:rotate(var(--angle,0deg))}.track{display:block;width:28px;height:16px;padding:3px;border-radius:12px;background:#d4d4cb;transition:background .4s}.thumb{display:block;width:10px;height:10px;border-radius:50%;background:#fff;box-shadow:0 1px 3px #0001;transform:translateX(0);transition:transform .4s cubic-bezier(.22,1,.36,1)}[aria-pressed="true"] .track{background:#ffffff55}[aria-pressed="true"] .thumb{transform:translateX(12px)}.note{font-size:11px}.back{display:inline-block;margin-top:24px;font-size:11px;color:var(--ink);text-underline-offset:4px}@media(max-width:360px){.samples{gap:14px}.sample{padding-inline:4px}}
+</style>
+</head>
+<body><main>
+<h1>Motion switch</h1><p>ONはゆっくり回転。OFFにすると減速して止まります。</p>
+<div class="samples">
+<div class="sample"><span class="state">ON</span><button class="motion-switch" type="button" aria-label="アニメーション" aria-pressed="true"><span class="star" aria-hidden="true"></span><span class="track" aria-hidden="true"><span class="thumb"></span></span></button></div>
+<div class="sample"><span class="state">OFF</span><button class="motion-switch" type="button" aria-label="アニメーション" aria-pressed="false"><span class="star" aria-hidden="true"></span><span class="track" aria-hidden="true"><span class="thumb"></span></span></button></div>
+</div>
+<p class="note">ボタンを押すとON／OFFを切り替えられます。</p><a class="back" href="../../">ポートフォリオに戻る</a>
+</main>
+<script>
+const states=[...document.querySelectorAll('.motion-switch')].map(button=>({button,star:button.querySelector('.star'),enabled:button.getAttribute('aria-pressed')==='true',speed:button.getAttribute('aria-pressed')==='true'?36:0,angle:0}));
+let frame=0,last=0;
+function tick(time){frame=0;const dt=last?Math.min((time-last)/1000,.05):0;last=time;let moving=false;for(const s of states){const target=s.enabled?36:0;const rate=s.enabled ? .3 : .55;s.speed+=(target-s.speed)*(1-Math.exp(-dt/rate));if(!s.enabled&&s.speed<.025)s.speed=0;s.angle=(s.angle+s.speed*dt)%360;s.star.style.setProperty('--angle',s.angle+'deg');moving||=s.enabled||s.speed>0;}if(moving&&!document.hidden)frame=requestAnimationFrame(tick);}
+function start(){if(!frame){last=0;frame=requestAnimationFrame(tick);}}
+for(const s of states)s.button.addEventListener('click',()=>{s.enabled=!s.enabled;s.button.setAttribute('aria-pressed',String(s.enabled));s.button.closest('.sample').querySelector('.state').textContent=s.enabled?'ON':'OFF';start();});
+document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnimationFrame(frame);frame=0;}else start();});start();
+</script>
+</body></html>

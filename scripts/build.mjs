@@ -47,7 +47,7 @@ try {
     return `                    <article class="work-item">
                         <a ${link} target="_blank" rel="noopener noreferrer" class="work-link">
                             <div class="work-image-container">
-                                <div class="work-image-placeholder">
+                                <div class="work-image-frame">
                                     <img src="${img}" alt="${title}" loading="lazy">
                                 </div>
                                 <div class="work-overlay"><span class="view-more">View</span></div>
@@ -68,14 +68,30 @@ try {
   if (source.split(start).length !== 2 || source.split(end).length !== 2 || source.indexOf(start) > source.indexOf(end)) {
     throw new Error('index.html must have exactly one ordered pair of works markers.');
   }
-  const result = source.slice(0, source.indexOf(start) + start.length) + '\n' + cards + '\n' + source.slice(source.indexOf(end));
+  let result = source.slice(0, source.indexOf(start) + start.length) + '\n' + cards + '\n' + source.slice(source.indexOf(end));
+  // Keep the Japanese font subset in sync with all published body text, including Works.
+  const bodyText = result.slice(result.indexOf('<body'))
+    .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '')
+    .replace(/<!--[\s\S]*?-->/g, '')
+    .replace(/<[^>]+>/g, '');
+  const japaneseText = [...new Set(bodyText.match(/[^\x00-\x7f\s]/gu) ?? [])].sort().join('');
+  const fontBase = 'https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300..500&display=swap';
+  // A large future site can use Google's full character subsets without an oversized URL.
+  const fontUrl = escape(fontBase + (encodeURIComponent(japaneseText).length <= 6000 ? '&text=' + encodeURIComponent(japaneseText) : ''));
+  if (result.split('<!-- japanese-font:start -->').length !== 2 || result.split('<!-- japanese-font:end -->').length !== 2 || result.indexOf('<!-- japanese-font:start -->') > result.indexOf('<!-- japanese-font:end -->')) {
+    throw new Error('index.html must have exactly one ordered pair of Japanese font markers.');
+  }
+  result = result.replace(/<!-- japanese-font:start -->[\s\S]*?<!-- japanese-font:end -->/, `<!-- japanese-font:start -->
+    <link rel="preload" as="style" href="${fontUrl}" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="${fontUrl}"></noscript>
+    <!-- japanese-font:end -->`);
   await writeFile(indexPath, result);
 
   if (!process.argv.includes('--works-only')) {
     const dist = path.join(root, 'dist');
     await rm(dist, { recursive: true, force: true });
     await mkdir(dist, { recursive: true });
-    for (const name of ['index.html', 'css', 'js', 'img']) {
+    for (const name of ['index.html', 'css', 'js', 'img', 'fonts']) {
       await cp(path.join(root, name), path.join(dist, name), { recursive: true });
     }
   }
