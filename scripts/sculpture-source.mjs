@@ -84,8 +84,7 @@ export function mountSculpture(container, reducedMotion) {
   }
   renderer.domElement.setAttribute('aria-hidden','true');container.append(renderer.domElement);
   const hero=document.querySelector('#hero');
-  const works=document.querySelector('#works');
-  let constructionEnd=hero.offsetHeight*.82;
+  let constructionEnd=hero.offsetHeight*.52;
   let raf=0,visible=true,last=performance.now(),start=last,progress=0,mobile=0,pointerX=0,pointerY=0;
   const ease=(a,b,p)=>THREE.MathUtils.smoothstep(p,a,b);
   function draw(time){
@@ -121,7 +120,7 @@ export function mountSculpture(container, reducedMotion) {
     if(visible&&!staticMode&&!document.hidden)raf=requestAnimationFrame(draw);
   }
   function requestDraw(){if(!raf)raf=requestAnimationFrame(draw);}
-  const resizer=new ResizeObserver(()=>{constructionEnd=hero.offsetHeight*.72+parseFloat(getComputedStyle(works).paddingTop)*.55;const r=container.getBoundingClientRect();renderer.setSize(r.width,r.height,false);camera.aspect=r.width/Math.max(1,r.height);camera.updateProjectionMatrix();requestDraw();});resizer.observe(container);
+  const resizer=new ResizeObserver(()=>{constructionEnd=hero.offsetHeight*.52;const r=container.getBoundingClientRect();renderer.setSize(r.width,r.height,false);camera.aspect=r.width/Math.max(1,r.height);camera.updateProjectionMatrix();requestDraw();});resizer.observe(container);
   const observer=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;if(visible)requestDraw();else{cancelAnimationFrame(raf);raf=0;}});observer.observe(container);
   hero.addEventListener('pointermove',e=>{if(reducedMotion.matches||e.pointerType!=='mouse')return;pointerX=e.clientX/innerWidth-.5;pointerY=e.clientY/innerHeight-.5;},{passive:true});
   reducedMotion.addEventListener('change',()=>{cancelAnimationFrame(raf);raf=0;requestDraw();});
