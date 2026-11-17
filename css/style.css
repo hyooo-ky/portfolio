@@ -1240,10 +1240,9 @@ body.theme-graphic {
 .theme-editorial .contact .arrow {
   width: clamp(42px, 6vw, 88px);
   height: 1px;
-  align-self: baseline;
+  align-self: center;
   transform: none;
   position: relative;
-  top: 0.12em;
 }
 
 .theme-editorial .contact .arrow::after {
