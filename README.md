@@ -12,7 +12,7 @@
   "title": "EXAMPLE",
   "category": "CORPORATE SITE / WordPress",
   "url": "https://example.com/",
-  "img": "img/work-12.webp"
+  "img": "img/liquor-mountain.webp"
 }
 ```
 
@@ -109,3 +109,7 @@ Inter（300〜800）とCormorant Garamond（400）のLatin WOFF2を `fonts/` に
 スイッチがONの間、星は10秒で1回転します。OFFにすると減速して停止し、角度を維持します。ページの動きがOFFでもスイッチ自身の切り替え・減速表示は維持します。
 
 動きの切り替えは右下の固定タブに配置しています。ヘッダーはスクロールで高さを変えず、背景レイヤーの透明度だけを切り替えます。
+
+## 画像のファイル名と表示順
+
+画像名は企業名の英小文字（単語間はハイフン）に統一し、表示順の番号を付けません。サムネイルは `img/shigatsusha.webp`、保存用スクリーンショットは `img/archives/2026-11-18/yuikuen.webp` のように管理します。実績の表示順は `data/works.json` の配列を並べ替えて変更できます。画像名の変更は不要です。
